@@ -1,13 +1,7 @@
 <script>
 import TabBar from "./TabBar.vue";
 import Countdown from "./Countdown.vue";
-import { getTimerTypeByName, TIMER_TYPES } from "../scripts/TimerTypes";
-
-/*  -----------------------------------------------------------------------------------------------
-  RIVEDI CON:
-  - SASS:
-    https://vueschool.io/articles/vuejs-tutorials/globally-load-sass-into-your-vue-js-applications/
---------------------------------------------------------------------------------------------------- */
+import { getTimerTypeByName, TIMER_TYPES } from "../enums/TimerTypes";
 
 export default {
   data() {

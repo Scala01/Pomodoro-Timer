@@ -1,6 +1,4 @@
 <script>
-import { TIMER_TYPES } from "../scripts/TimerTypes";
-
 export default {
   props: {
     secondsLeft: {

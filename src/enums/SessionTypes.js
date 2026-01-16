@@ -1,6 +1,6 @@
 export const SESSION_TYPES = {
-  FOCUS: { name: "on-focus", message: "Time to focus!" },
-  BREAK: { name: "take-a-break", message: "Time for a break!" },
+  FOCUS: { name: "on-focus" },
+  BREAK: { name: "take-a-break" },
 };
 
 export function isFocus(type) {
@@ -12,7 +12,14 @@ export function isBreak(type) {
 }
 
 export function getMessage(type) {
-  return type.message;
+  switch (type) {
+    case SESSION_TYPES.FOCUS:
+      return "Time to focus!";
+    case SESSION_TYPES.BREAK:
+      return "Time for a break!";
+    default:
+      throw new Error(`Invalid session name: ${type}`);
+  }
 }
 
 export function getSessionTypeByName(name) {
