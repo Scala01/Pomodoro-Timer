@@ -6,6 +6,7 @@ export default {
       required: true,
     },
     isTimerOn: { type: Boolean, required: true },
+    reset: { type: Number, required: true },
   },
   data() {
     return {
@@ -28,8 +29,11 @@ export default {
         this.pauseTimer();
       }
     },
-    secondsLeft(oldValue, newvalue) {
+    secondsLeft() {
       this.timer = this.secondsLeft;
+    },
+    reset(newValue, oldValue) {
+      if (oldValue < newValue) this.timer = this.secondsLeft;
     },
   },
   methods: {
