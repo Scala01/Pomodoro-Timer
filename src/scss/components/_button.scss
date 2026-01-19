@@ -1,0 +1,29 @@
+@use "../abstract/" as *;
+
+.btn {
+  border: none;
+  &:hover {
+    border: none;
+  }
+  &.btn-secondary {
+    color: $text;
+    background-color: transparent;
+    transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+    &:hover {
+      background-color: rgba($color: $secondary-hover, $alpha: 1);
+    }
+
+    i {
+      color: $accent;
+      height: 100%;
+    }
+  }
+
+  &.btn-primary {
+    background-color: $accent;
+    &:hover {
+      background-color: rgba($color: $accent-hover, $alpha: 1);
+    }
+  }
+}

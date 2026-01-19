@@ -27,12 +27,24 @@ export default {
 </script>
 
 <template>
-  <div class="tab-bar">
+  <div class="container text-center">
+    <div class="row g-3">
+      <Tab
+        class="col-md-4 col-12"
+        v-for="timerName in this.timerNames"
+        :is-active="currentTimerType == timerName"
+        :name="timerName"
+        @tab-clicked="changeSession"
+      />
+    </div>
+  </div>
+  <!-- <div class="d-flex flex-row mx-0 justify-content-between flex-wrap">
     <Tab
+      class="tab"
       v-for="timerName in this.timerNames"
       :is-active="currentTimerType == timerName"
       :name="timerName"
       @tab-clicked="changeSession"
     />
-  </div>
+  </div> -->
 </template>

@@ -1,9 +1,10 @@
 <script setup>
-// import HelloWorld from "./components/HelloWorld.vue";
 import TimerApp from "./components/TimerApp.vue";
 </script>
 <template>
-  <TimerApp id="app" />
+  <div id="app">
+    <TimerApp />
+  </div>
 </template>
 
 <style></style>

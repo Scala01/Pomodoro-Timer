@@ -17,7 +17,14 @@ export default {
 </script>
 
 <template>
-  <a :class="{ active: isActive }" class="tab" @click="onClick"
-    ><p>{{ name }}</p></a
-  >
+  <div class="tab">
+    <button
+      type="button"
+      :class="{ active: isActive }"
+      class="btn btn-secondary text-nowrap w-100"
+      @click="onClick"
+    >
+      {{ name }}
+    </button>
+  </div>
 </template>
