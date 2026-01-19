@@ -14,11 +14,6 @@ export default {
     TabBar,
     Countdown,
   },
-  computed: {
-    getButtonName() {
-      return this.isTimerOn ? "Stop" : "Start";
-    },
-  },
   methods: {
     setTimer(payload) {
       this.timerType = getTimerTypeByName(payload.timer);
@@ -58,12 +53,6 @@ export default {
       :is-timer-on="this.isTimerOn"
     />
     <div class="timer-buttons d-flex justify-content-center p-2 g-3">
-      <!--
-Source - https://stackoverflow.com/a
-Posted by Gagan Gami
-Retrieved 2026-01-19, License - CC BY-SA 3.0
--->
-
       <button type="button" class="btn btn-secondary">
         <i class="bi bi-arrow-counterclockwise fs-1"></i>
       </button>
@@ -72,12 +61,12 @@ Retrieved 2026-01-19, License - CC BY-SA 3.0
         class="btn btn-primary w-100 fs-4 mx-2"
         @click="handleClick"
       >
-        {{ getButtonName }}
+        <i v-if="this.isTimerOn" class="bi bi-pause-fill fs-1"></i>
+        <i v-else class="bi bi-play-fill fs-1"></i>
       </button>
       <button type="button" class="btn btn-secondary">
         <i class="bi bi-arrow-right-circle fs-1"></i>
       </button>
     </div>
-    <!-- other timer info... -->
   </div>
 </template>

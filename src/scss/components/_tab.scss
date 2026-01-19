@@ -1,22 +1,5 @@
-// /*  -----------------------------------------------------------------------------------------------
-//   TAB
-// --------------------------------------------------------------------------------------------------- */
-
 @use "../abstract/colors" as *;
-
-// .tab button[type="button"] {
-//   color: $text;
-//   background-color: transparent;
-//   transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
-// }
 
 .tab button[type="button"].active {
   background-color: $secondary !important;
 }
-
-// .tab:hover,
-// .tab.active {
-//   background-color: #5e5e5e;
-// }
-
-// // button, [type=button], [type=reset], [type=submit]

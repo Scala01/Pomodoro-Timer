@@ -3,13 +3,9 @@
 
 .timer-container {
   max-width: 800px;
-  background-color: $neutral;
+  background-color: $light;
   border-radius: $border-radius;
   border: 1px solid $text;
-  // .timer-count {
-  //   transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
-  // }
-
   display: flex;
   flex-flow: column;
   justify-content: space-between;
