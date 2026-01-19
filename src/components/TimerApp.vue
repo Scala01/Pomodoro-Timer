@@ -8,6 +8,7 @@ export default {
     return {
       timerType: this.getDefaultTimer(),
       isTimerOn: false,
+      resetCount: 0,
     };
   },
   components: {
@@ -26,8 +27,12 @@ export default {
     stopTimer() {
       this.isTimerOn = false;
     },
-    handleClick() {
+    handleTimerOn() {
       this.isTimerOn ? this.stopTimer() : this.startTimer();
+    },
+    reset() {
+      this.stopTimer();
+      this.resetCount++;
     },
 
     getTabs() {
@@ -49,17 +54,18 @@ export default {
     <TabBar class="mb-4" :timer-names="getTabs()" @set-new-timer="setTimer" />
     <Countdown
       class="mb-4"
+      :reset="this.resetCount"
       :seconds-left="this.timerType.time"
       :is-timer-on="this.isTimerOn"
     />
     <div class="timer-buttons d-flex justify-content-center p-2 g-3">
-      <button type="button" class="btn btn-secondary">
+      <button type="button" class="btn btn-secondary" @click="reset">
         <i class="bi bi-arrow-counterclockwise fs-1"></i>
       </button>
       <button
         type="button"
         class="btn btn-primary w-100 fs-4 mx-2"
-        @click="handleClick"
+        @click="handleTimerOn"
       >
         <i v-if="this.isTimerOn" class="bi bi-pause-fill fs-1"></i>
         <i v-else class="bi bi-play-fill fs-1"></i>
