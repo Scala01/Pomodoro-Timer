@@ -54,5 +54,5 @@ export default {
 </script>
 
 <template>
-  <h1>{{ getFormattedTime }}</h1>
+  <h1 class="fs-0 timer-count">{{ getFormattedTime }}</h1>
 </template>

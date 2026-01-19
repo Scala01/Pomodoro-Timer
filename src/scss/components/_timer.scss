@@ -1,0 +1,21 @@
+@use "../abstract/_colors" as *;
+@use "../abstract/_variables" as *;
+
+.timer-container {
+  max-width: 800px;
+  background-color: $neutral;
+  border-radius: $border-radius;
+  border: 1px solid $text;
+  // .timer-count {
+  //   transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  // }
+
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  min-height: 80vh;
+
+  .timer-buttons button[type="button"] {
+    min-height: 75px !important;
+  }
+}

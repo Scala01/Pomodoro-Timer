@@ -1,6 +1,14 @@
-/*  -----------------------------------------------------------------------------------------------
-  RESET
---------------------------------------------------------------------------------------------------- */
+@use "../abstract/colors" as *;
+
 body {
-  background-color: #333;
+  background-color: $primary;
+}
+
+#app {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  min-width: 100%;
 }

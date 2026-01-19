@@ -1,7 +1,0 @@
-// Import all of Bootstrap's CSS
-@use "bootstrap/scss/bootstrap";
-
-@use "./base/_base" as *;
-@use "./base/_reset" as *;
-
-@use "./components/_tab" as *;

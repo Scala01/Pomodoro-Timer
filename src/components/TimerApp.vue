@@ -50,15 +50,34 @@ export default {
 </script>
 
 <template>
-  <div class="timer-container">
-    <TabBar :timer-names="getTabs()" @set-new-timer="setTimer" />
+  <div class="timer-container container-xxl p-5">
+    <TabBar class="mb-4" :timer-names="getTabs()" @set-new-timer="setTimer" />
     <Countdown
+      class="mb-4"
       :seconds-left="this.timerType.time"
       :is-timer-on="this.isTimerOn"
     />
-    <button class="timer-button" @click="handleClick">
-      {{ getButtonName }}
-    </button>
+    <div class="timer-buttons d-flex justify-content-center p-2 g-3">
+      <!--
+Source - https://stackoverflow.com/a
+Posted by Gagan Gami
+Retrieved 2026-01-19, License - CC BY-SA 3.0
+-->
+
+      <button type="button" class="btn btn-secondary">
+        <i class="bi bi-arrow-counterclockwise fs-1"></i>
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary w-100 fs-4 mx-2"
+        @click="handleClick"
+      >
+        {{ getButtonName }}
+      </button>
+      <button type="button" class="btn btn-secondary">
+        <i class="bi bi-arrow-right-circle fs-1"></i>
+      </button>
+    </div>
     <!-- other timer info... -->
   </div>
 </template>
