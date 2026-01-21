@@ -1,24 +1,14 @@
-<script>
+<script setup>
+import { ref } from "vue";
 import SettingsModal from "./SettingsModal.vue";
 
-export default {
-  data() {
-    return {
-      showModal: false,
-    };
-  },
-  components: {
-    SettingsModal,
-  },
-  methods: {
-    closeModal() {
-      this.showModal = false;
-    },
-    openModal() {
-      this.showModal = true;
-    },
-  },
-};
+const showModal = ref(false);
+function closeModal() {
+  showModal.value = false;
+}
+function openModal() {
+  showModal.value = true;
+}
 </script>
 
 <template>

@@ -1,52 +1,46 @@
-<script>
+<script setup>
+import { ref } from "vue";
 import TabBar from "./TabBar.vue";
 import Countdown from "./Countdown.vue";
 import { getTimerTypeByName, TIMER_TYPES } from "../enums/TimerTypes";
 
-export default {
-  data() {
-    return {
-      timerType: this.getDefaultTimer(),
-      isTimerOn: false,
-      resetCount: 0,
-    };
-  },
-  components: {
-    TabBar,
-    Countdown,
-  },
-  methods: {
-    setTimer(payload) {
-      this.timerType = getTimerTypeByName(payload.timer);
-      this.stopTimer();
-    },
+const timerType = ref(getDefaultTimer());
+const isTimerOn = ref(false);
+const resetCount = ref(0);
 
-    startTimer() {
-      this.isTimerOn = true;
-    },
-    stopTimer() {
-      this.isTimerOn = false;
-    },
-    handleTimerOn() {
-      this.isTimerOn ? this.stopTimer() : this.startTimer();
-    },
-    reset() {
-      this.stopTimer();
-      this.resetCount++;
-    },
+function setTimer(payload) {
+  timerType.value = getTimerTypeByName(payload.timer);
+  stopTimer();
+}
 
-    getTabs() {
-      return [
-        TIMER_TYPES.POMODORO.name,
-        TIMER_TYPES.SHORT_BREAK.name,
-        TIMER_TYPES.LONG_BREAK.name,
-      ];
-    },
-    getDefaultTimer() {
-      return TIMER_TYPES.POMODORO;
-    },
-  },
-};
+function startTimer() {
+  isTimerOn.value = true;
+}
+
+function stopTimer() {
+  isTimerOn.value = false;
+}
+
+function handleTimerOn() {
+  isTimerOn.value ? stopTimer() : startTimer();
+}
+
+function reset() {
+  stopTimer();
+  resetCount.value++;
+}
+
+function getTabs() {
+  return [
+    TIMER_TYPES.POMODORO.name,
+    TIMER_TYPES.SHORT_BREAK.name,
+    TIMER_TYPES.LONG_BREAK.name,
+  ];
+}
+
+function getDefaultTimer() {
+  return TIMER_TYPES.POMODORO;
+}
 </script>
 
 <template>
@@ -54,9 +48,9 @@ export default {
     <TabBar class="mb-4" :timer-names="getTabs()" @set-new-timer="setTimer" />
     <Countdown
       class="mb-4"
-      :reset="this.resetCount"
-      :seconds-left="this.timerType.time"
-      :is-timer-on="this.isTimerOn"
+      :reset="resetCount"
+      :seconds-left="timerType.time"
+      :is-timer-on="isTimerOn"
     />
     <div class="timer-buttons d-flex justify-content-center p-2 g-3">
       <button type="button" class="btn btn-secondary" @click="reset">
@@ -67,7 +61,7 @@ export default {
         class="btn btn-primary w-100 fs-4 mx-2"
         @click="handleTimerOn"
       >
-        <i v-if="this.isTimerOn" class="bi bi-pause-fill fs-1"></i>
+        <i v-if="isTimerOn" class="bi bi-pause-fill fs-1"></i>
         <i v-else class="bi bi-play-fill fs-1"></i>
       </button>
       <button type="button" class="btn btn-secondary">

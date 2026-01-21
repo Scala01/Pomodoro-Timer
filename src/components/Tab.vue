@@ -1,19 +1,20 @@
-<script>
-export default {
-  emits: ["tab-clicked"],
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
-    isActive: { type: Boolean, default: false },
+<script setup>
+const props = defineProps({
+  name: {
+    type: String,
+    required: true,
   },
-  methods: {
-    onClick() {
-      this.$emit("tab-clicked", { nameSession: this.name });
-    },
+  isActive: {
+    type: Boolean,
+    default: false,
   },
-};
+});
+
+const emit = defineEmits(["tabIsClicked"]);
+
+function onClick() {
+  emit("tabIsClicked", { nameSession: props.name });
+}
 </script>
 
 <template>

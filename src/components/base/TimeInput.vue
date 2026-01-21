@@ -1,50 +1,41 @@
-<script>
-import {
-  getFormattedSeconds,
-  getMinutesBySeconds,
-  getFormattedTime,
-} from "../../js/utils/timeHandler";
+<script setup>
+import { ref, computed } from "vue";
+import { getFormattedTime } from "../../js/utils/timeHandler";
 
-export default {
-  emit: ["timeConfirmed"],
-  props: {
-    time: {
-      type: Number,
-      required: true,
-    },
+const props = defineProps({
+  time: {
+    type: Number,
+    required: true,
   },
-  data() {
-    return {
-      newTime: this.time,
-      onEdit: false,
-    };
-  },
-  computed: {
-    formattedTime() {
-      return getFormattedTime(this.newTime);
-    },
-  },
-  methods: {
-    changeTime(value) {
-      if (value < 0 && this.newTime <= Math.abs(value)) {
-        this.newTime = 0;
-      } else {
-        this.newTime = this.newTime + value;
-      }
-    },
-    changeOnEdit() {
-      this.onEdit ? (this.onEdit = false) : (this.onEdit = true);
-    },
-    reset() {
-      this.newTime = this.time;
-      this.changeOnEdit();
-    },
-    confirm() {
-      this.$emit("timeConfirmed");
-      this.changeOnEdit();
-    },
-  },
-};
+});
+
+const emit = defineEmits(["timeConfirmed"]);
+
+const newTime = ref(props.time);
+const onEdit = ref(false);
+
+const formattedTime = computed(() => getFormattedTime(newTime.value));
+
+function changeTime(value) {
+  if (value < 0 && newTime.value <= Math.abs(value)) {
+    newTime.value = 0;
+  } else {
+    newTime.value += value;
+  }
+}
+
+function changeOnEdit() {
+  onEdit.value = !onEdit.value;
+}
+
+function reset() {
+  newTime.value = props.time;
+  changeOnEdit();
+}
+function confirm() {
+  emit("timeConfirmed");
+  changeOnEdit();
+}
 </script>
 
 <template>

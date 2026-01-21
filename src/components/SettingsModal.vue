@@ -1,6 +1,24 @@
-<script>
+<script setup>
+import { ref, onMounted, onUnmounted } from "vue";
 import TimeInput from "./base/TimeInput.vue";
-import { getTimerTypeByName, TIMER_TYPES } from "../enums/TimerTypes";
+import { TIMER_TYPES } from "../enums/TimerTypes";
+
+const emit = defineEmits(["closeSettings"]);
+
+// const open = ref(false);
+const timers = ref([
+  TIMER_TYPES.POMODORO,
+  TIMER_TYPES.SHORT_BREAK,
+  TIMER_TYPES.LONG_BREAK,
+]);
+
+onMounted(() => {
+  setOverlayOnBody();
+});
+
+onUnmounted(() => {
+  removeOverlayFromBody();
+});
 
 function setOverlayOnBody() {
   const body = document.querySelector("body");
@@ -16,35 +34,12 @@ function removeOverlayFromBody() {
   body.style.overflow = "";
 }
 
-export default {
-  emits: ["closeSettings"],
-  data() {
-    return {
-      open: false,
-      timers: [
-        TIMER_TYPES.POMODORO,
-        TIMER_TYPES.SHORT_BREAK,
-        TIMER_TYPES.LONG_BREAK,
-      ],
-    };
-  },
-  components: {
-    TimeInput,
-  },
-  mounted() {
-    setOverlayOnBody();
-  },
-  unmounted() {
-    removeOverlayFromBody();
-  },
-  methods: {
-    close() {
-      removeOverlayFromBody();
-      this.$emit("closeSettings");
-    },
-    saveNewWorkTime() {},
-  },
-};
+function close() {
+  // removeOverlayFromBody();
+  emit("closeSettings");
+}
+
+function saveNewWorkTime() {}
 </script>
 
 <template>
@@ -58,7 +53,11 @@ export default {
       <!-- inserire un v-for per ottimizzare -->
       <div class="container-fluid">
         <div class="row g-3 my-3">
-          <div v-for="timer in this.timers" class="col-12 col-md-4">
+          <div
+            v-for="timer in timers"
+            :key="timer.name"
+            class="col-12 col-md-4"
+          >
             <div class="editing-container">
               <p class="fs-4 border-bottom pb-2">{{ timer.name }}</p>
               <TimeInput :time="timer.time" @time-confirmed="saveNewWorkTime" />
