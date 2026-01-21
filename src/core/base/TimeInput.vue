@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
-import { getFormattedTime } from "../../js/utils/timeHandler";
+import { getFormattedTime } from "../../timer/composables/useTimeFormatter";
 
 const props = defineProps({
   time: {

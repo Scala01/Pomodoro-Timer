@@ -10,6 +10,9 @@ export default defineConfig({
   resolve: {
     alias: {
       "~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
+      "@": path.resolve(__dirname, "src"),
+      "@core": path.resolve(__dirname, "src/core"),
+      "@timer": path.resolve(__dirname, "src/timer"),
     },
   },
   server: {

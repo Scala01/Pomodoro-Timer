@@ -1,7 +1,7 @@
 @use "../abstract/variables" as *;
 @use "../abstract/colors" as *;
 
-.modal {
+.modal-container {
   overflow-y: scroll;
   background-color: #e7e7e7;
   position: fixed;
@@ -17,8 +17,11 @@
   scrollbar-width: none;
 
   // .modal-content { }
-  i.delete {
+  .btn.close {
     position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
   }
 }
 

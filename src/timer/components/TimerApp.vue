@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import TabBar from "./TabBar.vue";
 import Countdown from "./Countdown.vue";
-import { getTimerTypeByName, TIMER_TYPES } from "../enums/TimerTypes";
+import { getTimerTypeByName, TIMER_TYPES } from "@timer/models/TimerTypes";
 
 const timerType = ref(getDefaultTimer());
 const isTimerOn = ref(false);
