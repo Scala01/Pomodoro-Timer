@@ -16,7 +16,6 @@
 
     i {
       color: $accent;
-      height: 100%;
     }
   }
 
@@ -24,6 +23,23 @@
     background-color: $accent;
     &:hover {
       background-color: rgba($color: $accent-hover, $alpha: 1);
+    }
+  }
+
+  &.btn-icon,
+  &.btn-icon-lg {
+    line-height: 0;
+    padding: 0.5rem;
+    i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.2em;
+      aspect-ratio: 1/1;
+      font-size: 1.2em;
+    }
+    &-lg i {
+      font-size: 1.5em;
     }
   }
 }

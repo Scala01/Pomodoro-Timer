@@ -1,0 +1,48 @@
+@use "../abstract/variables" as *;
+@use "../abstract/colors" as *;
+
+.modal {
+  overflow-y: scroll;
+  background-color: #e7e7e7;
+  position: fixed;
+  max-width: 800px;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 100px);
+  height: calc(100% - 100px);
+  padding: 2rem;
+  border-radius: $border-radius;
+  z-index: 999;
+  scrollbar-width: none;
+
+  // .modal-content { }
+  i.delete {
+    position: absolute;
+  }
+}
+
+body.overlay:before {
+  content: "";
+  z-index: 0;
+  position: absolute;
+  background-color: black;
+  opacity: 0.3;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.editing-container {
+  padding: 1rem;
+  min-width: 100px;
+  min-height: 100px;
+  background-color: #fff;
+  border-radius: $border-radius;
+
+  .editable {
+    background-color: #fff;
+    border-radius: $border-radius;
+  }
+}

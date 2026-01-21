@@ -3,9 +3,8 @@
 
 .timer-container {
   max-width: 800px;
-  background-color: $light;
+  background-color: rgba($color: #fff, $alpha: 0.5);
   border-radius: $border-radius;
-  border: 1px solid $text;
   display: flex;
   flex-flow: column;
   justify-content: space-between;

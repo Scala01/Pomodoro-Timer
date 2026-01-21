@@ -1,4 +1,5 @@
 <script>
+import Settings from "./Settings.vue";
 import Tab from "./Tab.vue";
 
 export default {
@@ -16,6 +17,7 @@ export default {
   },
   components: {
     Tab,
+    Settings,
   },
   methods: {
     changeSession(payload) {
@@ -28,6 +30,7 @@ export default {
 
 <template>
   <div class="container text-center">
+    <Settings />
     <div class="row g-3">
       <Tab
         class="col-md-4 col-12"
@@ -38,13 +41,4 @@ export default {
       />
     </div>
   </div>
-  <!-- <div class="d-flex flex-row mx-0 justify-content-between flex-wrap">
-    <Tab
-      class="tab"
-      v-for="timerName in this.timerNames"
-      :is-active="currentTimerType == timerName"
-      :name="timerName"
-      @tab-clicked="changeSession"
-    />
-  </div> -->
 </template>
