@@ -22,7 +22,7 @@ function onClick() {
     <button
       type="button"
       :class="{ active: isActive }"
-      class="btn btn-secondary text-nowrap w-100"
+      class="btn-secondary text-nowrap w-100"
       @click="onClick"
     >
       {{ name }}

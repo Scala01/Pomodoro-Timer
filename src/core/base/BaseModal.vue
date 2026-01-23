@@ -1,30 +1,22 @@
 <script setup>
-import { onMounted, onUnmounted } from "vue";
+import { computed } from "vue";
 
-const props = defineProps({ zIndex: Number });
+const props = defineProps({
+  zIndex: Number,
+  modalSize: { type: String, default: "" },
+});
 const emit = defineEmits(["close"]);
 
-onMounted(() => {
-  setOverlayOnBody();
+const modalContainer = computed(() => {
+  return props.modalSize == ""
+    ? "modal-container"
+    : `modal-container-${props.modalSize}`;
 });
 
-onUnmounted(() => {
-  removeOverlayFromBody();
+const overlayIndex = computed(() => {
+  if (!props.zIndex) return;
+  return props.zIndex - 1;
 });
-
-function setOverlayOnBody() {
-  const body = document.querySelector("body");
-  if (!body) return;
-  body.classList.add("overlay");
-  body.style.overflow = "hidden";
-}
-
-function removeOverlayFromBody() {
-  const body = document.querySelector("body");
-  if (!body) return;
-  body.classList.remove("overlay");
-  body.style.overflow = "";
-}
 
 // function handleOutsideClick() {
 function close() {
@@ -33,16 +25,37 @@ function close() {
 </script>
 
 <template>
-  <div class="modal-container">
-    <button
-      type="button"
-      class="close btn btn-secondary btn-icon-lg m-3"
-      @click="close"
-    >
-      <i class="bi bi-x"></i>
-    </button>
+  <div class="modal-overlay" :style="{ zIndex: overlayIndex }"></div>
+  <div
+    :class="modalContainer"
+    :style="{ zIndex: zIndex }"
+    class="d-flex flex-column justify-content-between"
+  >
+    <!-- class="position-relative top-0 end-0 btn-secondary btn-icon-lg" -->
+    <div class="d-flex flex-column">
+      <div class="d-flex flex-row">
+        <div>
+          <button
+            type="button"
+            class="btn-secondary btn-icon-md me-2"
+            @click="close"
+          >
+            <slot name="start-button">
+              <i class="bi bi-x"></i>
+            </slot>
+          </button>
+        </div>
+        <span class="align-content-center">
+          <slot name="title"> </slot>
+        </span>
+      </div>
+      <slot name="description"> </slot>
+    </div>
+
     <slot />
+
+    <slot name="end-button">
+      <button type="button" class="btn-primary" @click="close">Conferma</button>
+    </slot>
   </div>
 </template>
-
-<style scoped></style>

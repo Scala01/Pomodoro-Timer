@@ -53,18 +53,18 @@ function getDefaultTimer() {
       :is-timer-on="isTimerOn"
     />
     <div class="timer-buttons d-flex justify-content-center p-2 g-3">
-      <button type="button" class="btn btn-secondary" @click="reset">
+      <button type="button" class="btn-secondary" @click="reset">
         <i class="bi bi-arrow-counterclockwise fs-1"></i>
       </button>
       <button
         type="button"
-        class="btn btn-primary w-100 fs-4 mx-2"
+        class="btn-primary w-100 fs-4 mx-2"
         @click="handleTimerOn"
       >
         <i v-if="isTimerOn" class="bi bi-pause-fill fs-1"></i>
         <i v-else class="bi bi-play-fill fs-1"></i>
       </button>
-      <button type="button" class="btn btn-secondary">
+      <button type="button" class="btn-secondary">
         <i class="bi bi-arrow-right-circle fs-1"></i>
       </button>
     </div>
