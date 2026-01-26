@@ -1,6 +1,6 @@
 import { SESSION_TYPES } from "./SessionTypes";
 
-export const TIMER_TYPES = Object.freeze({
+export const TIMER_SESSIONS = Object.freeze({
   POMODORO: Object.freeze({
     name: "Pomodoro",
     type: SESSION_TYPES.FOCUS,
@@ -23,7 +23,9 @@ export function getTimeByTimer(timerType) {
 }
 
 export function getTimerTypeByName(name) {
-  let timer = Object.values(TIMER_TYPES).find((timer) => timer.name === name);
+  let timer = Object.values(TIMER_SESSIONS).find(
+    (timer) => timer.name === name,
+  );
   if (!timer) throw new Error(`Invalid session name: ${name}`);
   return timer;
 }

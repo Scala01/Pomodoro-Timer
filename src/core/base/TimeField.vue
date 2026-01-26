@@ -2,11 +2,11 @@
 <script setup>
 import { ref, computed } from "vue";
 import { getFormattedTime } from "@/timer/composables/useTimeFormatter";
-import { TIMER_TYPES } from "@timer/models/TimerTypes";
+import { TIMER_SESSIONS } from "@timer/models/TimerSessions";
 
 const props = defineProps({
   timer: {
-    type: TIMER_TYPES,
+    type: TIMER_SESSIONS,
     required: true,
   },
 });

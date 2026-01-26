@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import BaseModal from "@core/base/BaseModal.vue";
 import TimeField from "@core/base/TimeField.vue";
-import { TIMER_TYPES } from "@timer/models/TimerTypes";
+import { TIMER_SESSIONS } from "@timer/models/TimerSessions";
 import useModalStore from "@core/composables/useModalStore.js";
 import TimeInputModal from "@timer/components/TimeInputModal.vue";
 
@@ -15,9 +15,9 @@ function openTimeChange(timer) {
 const emit = defineEmits(["closeSettings"]);
 
 const timers = ref([
-  TIMER_TYPES.POMODORO,
-  TIMER_TYPES.SHORT_BREAK,
-  TIMER_TYPES.LONG_BREAK,
+  TIMER_SESSIONS.POMODORO,
+  TIMER_SESSIONS.SHORT_BREAK,
+  TIMER_SESSIONS.LONG_BREAK,
 ]);
 
 // function saveNewWorkTime() {}

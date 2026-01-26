@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import BaseModal from "@core/base/BaseModal.vue";
-import { TIMER_TYPES } from "@timer/models/TimerTypes";
+import { TIMER_SESSIONS } from "@timer/models/TimerSessions";
 import { getMinutes } from "@/timer/composables/useTimeFormatter";
 import useModalStore from "@core/composables/useModalStore.js";
 
@@ -9,7 +9,7 @@ const { closeTopModal } = useModalStore();
 
 const props = defineProps({
   timer: {
-    type: TIMER_TYPES,
+    type: TIMER_SESSIONS,
     required: true,
   },
 });

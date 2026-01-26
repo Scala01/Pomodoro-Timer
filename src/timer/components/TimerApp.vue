@@ -2,7 +2,10 @@
 import { ref } from "vue";
 import TabBar from "./TabBar.vue";
 import Countdown from "./Countdown.vue";
-import { getTimerTypeByName, TIMER_TYPES } from "@timer/models/TimerTypes";
+import {
+  getTimerTypeByName,
+  TIMER_SESSIONS,
+} from "@timer/models/TimerSessions";
 
 const timerType = ref(getDefaultTimer());
 const isTimerOn = ref(false);
@@ -32,14 +35,14 @@ function reset() {
 
 function getTabs() {
   return [
-    TIMER_TYPES.POMODORO.name,
-    TIMER_TYPES.SHORT_BREAK.name,
-    TIMER_TYPES.LONG_BREAK.name,
+    TIMER_SESSIONS.POMODORO.name,
+    TIMER_SESSIONS.SHORT_BREAK.name,
+    TIMER_SESSIONS.LONG_BREAK.name,
   ];
 }
 
 function getDefaultTimer() {
-  return TIMER_TYPES.POMODORO;
+  return TIMER_SESSIONS.POMODORO;
 }
 </script>
 
