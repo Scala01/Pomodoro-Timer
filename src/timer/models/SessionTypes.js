@@ -3,6 +3,10 @@ export const SESSION_TYPES = {
   BREAK: { name: "take-a-break" },
 };
 
+export function equals(type1, type2) {
+  return type1.name == type2.name;
+}
+
 export function isFocus(type) {
   return type === SESSION_TYPES.FOCUS;
 }

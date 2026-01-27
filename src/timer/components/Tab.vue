@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({
-  name: {
+  title: {
     type: String,
     required: true,
   },
@@ -13,7 +13,7 @@ const props = defineProps({
 const emit = defineEmits(["tabIsClicked"]);
 
 function onClick() {
-  emit("tabIsClicked", { nameSession: props.name });
+  if (!props.isActive) emit("tabIsClicked", { name: props.title });
 }
 </script>
 
@@ -25,7 +25,7 @@ function onClick() {
       class="btn-secondary text-nowrap w-100"
       @click="onClick"
     >
-      {{ name }}
+      {{ title }}
     </button>
   </div>
 </template>

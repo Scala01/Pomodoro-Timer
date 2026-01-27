@@ -1,18 +1,21 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import TabBar from "./TabBar.vue";
 import Countdown from "./Countdown.vue";
-import {
-  getTimerTypeByName,
-  TIMER_SESSIONS,
-} from "@timer/models/TimerSessions";
+import { getTimerSessionByName } from "../models/TimerSessions.js";
+import useTimer from "../composables/useTimer.js";
 
-const timerType = ref(getDefaultTimer());
+const { current, setTimerSession } = useTimer();
+
+const currentTimer = ref(current);
 const isTimerOn = ref(false);
 const resetCount = ref(0);
 
+const secondsLeft = computed(() => currentTimer.value.time * 60);
+
 function setTimer(payload) {
-  timerType.value = getTimerTypeByName(payload.timer);
+  let selectedTimer = getTimerSessionByName(payload.timerName);
+  setTimerSession(selectedTimer);
   stopTimer();
 }
 
@@ -32,27 +35,15 @@ function reset() {
   stopTimer();
   resetCount.value++;
 }
-
-function getTabs() {
-  return [
-    TIMER_SESSIONS.POMODORO.name,
-    TIMER_SESSIONS.SHORT_BREAK.name,
-    TIMER_SESSIONS.LONG_BREAK.name,
-  ];
-}
-
-function getDefaultTimer() {
-  return TIMER_SESSIONS.POMODORO;
-}
 </script>
 
 <template>
   <div class="timer-container container-xxl p-5">
-    <TabBar class="mb-4" :timer-names="getTabs()" @set-new-timer="setTimer" />
+    <TabBar class="mb-4" @set-new-timer="setTimer" />
     <Countdown
       class="mb-4"
       :reset="resetCount"
-      :seconds-left="timerType.time"
+      :seconds-left="secondsLeft"
       :is-timer-on="isTimerOn"
     />
     <div class="timer-buttons d-flex justify-content-center p-2 g-3">

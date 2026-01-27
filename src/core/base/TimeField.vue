@@ -1,21 +1,22 @@
-<!-- ruolo solo di ui -->
 <script setup>
 import { ref, computed } from "vue";
-import { getFormattedTime } from "@/timer/composables/useTimeFormatter";
-import { TIMER_SESSIONS } from "@timer/models/TimerSessions";
+import { getFormattedTimeByMinutes } from "@/timer/composables/useTimeFormatter";
+import { TimerSession } from "@timer/models/TimerSessions";
 
 const props = defineProps({
   timer: {
-    type: TIMER_SESSIONS,
+    type: TimerSession,
     required: true,
   },
 });
 
 const emit = defineEmits(["editTime"]);
 
-const newTime = ref(props.timer.time);
+const newTime = ref(props.timer);
 
-const formattedTime = computed(() => getFormattedTime(newTime.value));
+const formattedTime = computed(() =>
+  getFormattedTimeByMinutes(newTime.value.time),
+);
 
 function edit() {
   emit("editTime", props.timer);

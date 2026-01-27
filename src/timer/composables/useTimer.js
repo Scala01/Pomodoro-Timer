@@ -1,6 +1,6 @@
-/*  -----------------------------------------------------------------------------------------------
-  Timer Type 
---------------------------------------------------------------------------------------------------- */
+import { reactive, toRefs, computed, readonly, markRaw } from "vue";
+import { TimerSession } from "@timer/models/TimerSessions.js";
+import { SESSION_TYPES } from "../models/SessionTypes.js";
 
 /**
  * Voglio creare la gestione dei timer qui dentro.
@@ -11,8 +11,53 @@
  *  effettuate le modifiche dell'app per aggiornare il suo stato
  */
 
+const state = reactive({
+  // pastSessions: mostra le sessioni di timer eseguite
+  // path: mostra l'ordine con cui eseguire automaticamente le sessioni di timer
+  pastSessions: [],
+  currentSession: null,
+  // let path = [];
+  //path: maps in cui w sb lb hanno un valore ciascuno. Chi ha zero è quello attuale, 1 è il prossimo e cosi via
+  // ad ogni change del pastSessions va modificaro il path: ogni valore -1 tranne chi ha 0 che avrà valore di default
+  // che dipenderà dall'ordine.
+  // Dunque:
+  //  - W:  0 1(ogni 1 break) //0 perchè parte work
+  //  - SB: 1 1(ogni 1 work)
+  //  - LB: 4 4(ogni 4 work)
+  // dopo un round
+  //  - W:  1 1
+  //  - SB: 0 1
+  //  - LB: 3 4
+  //... altrimenti una queue...
+});
+
+export default function useTimer() {
+  const { pastSessions } = toRefs(state);
+  //no qua il default -> non voglio farlo dipendere da TimerSession class
+  const setDefaultTimer = () =>
+    setTimerSession(new TimerSession("Pomodoro", SESSION_TYPES.FOCUS, 25));
+  setDefaultTimer();
+
+  //to do: pastSessions contains past timer sessions only.
+  // The current session must be stored in dedicated var only.
+  // Then on every change of session, pastSessions and
+  // currentSession must be updated as the past and current sessions
+  function setTimerSession(timerSession) {
+    state.pastSessions.push(timerSession);
+    state.currentSession = timerSession;
+  }
+
+  const history = computed(() => state.pastSessions);
+  const current = computed(() => state.currentSession);
+
+  return {
+    current,
+    setTimerSession,
+    // getCurrentTimerSession,
+  };
+}
+
 /**
- *
  * HISTORY
  * Ogni sessione avrà un id
  * Voglio un metodo che salvi la cronologia: i timer sessions "vecchi" e quello corrente

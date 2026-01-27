@@ -2,21 +2,23 @@
 import { ref } from "vue";
 import Settings from "./Settings.vue";
 import Tab from "./Tab.vue";
+import useTimer from "../composables/useTimer.js";
+import { TimerSessions } from "../models/TimerSessions.js";
 
-const props = defineProps({
-  timerNames: {
-    type: Array,
-    required: true,
-  },
-});
+const { current } = useTimer();
 
 const emit = defineEmits(["setNewTimer"]);
 
-const currentTimerType = ref(props.timerNames[0]);
+const currentTimer = ref(current);
+const timerNames = getTabs();
 
 function changeSession(payload) {
-  currentTimerType.value = payload.nameSession;
-  emit("setNewTimer", { timer: currentTimerType.value });
+  emit("setNewTimer", { timerName: payload.name });
+}
+
+function getTabs() {
+  if (TimerSessions.length != 3) return;
+  return TimerSessions.map((ts) => ts.name);
 }
 </script>
 
@@ -28,8 +30,8 @@ function changeSession(payload) {
         class="col-md-4 col-12"
         v-for="timerName in timerNames"
         :key="timerName"
-        :is-active="currentTimerType === timerName"
-        :name="timerName"
+        :is-active="currentTimer.name === timerName"
+        :title="timerName"
         @tab-is-clicked="changeSession"
       />
     </div>

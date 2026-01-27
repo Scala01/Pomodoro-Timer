@@ -8,14 +8,14 @@ import useModalStore from "@core/composables/useModalStore.js";
 const { closeTopModal } = useModalStore();
 
 const props = defineProps({
-  timer: {
+  timerToEdit: {
     type: TIMER_SESSIONS,
     required: true,
   },
 });
 
 const emit = defineEmits(["setTime"]);
-const displayedMinutes = ref(getMinutes(props.timer.time));
+const displayedMinutes = ref(getMinutes(props.timerToEdit.time));
 const maxMinutes = 60;
 
 //qui da modificare direttamente lo store globale -- dopo il prossimo refactoring
@@ -28,7 +28,7 @@ function setTime() {
 }
 
 function reset() {
-  displayedMinutes.value = getMinutes(props.timer.time);
+  displayedMinutes.value = getMinutes(props.timerToEdit.time);
 }
 function decreaseTimer() {
   if (displayedMinutes.value == 0) return;

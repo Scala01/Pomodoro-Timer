@@ -12,3 +12,7 @@ export const getTime = (seconds) => {
 export const getMinutes = (seconds) => {
   return Math.floor(seconds / 60);
 };
+
+export const getFormattedTimeByMinutes = (min) => {
+  return `${min}:00`;
+};
