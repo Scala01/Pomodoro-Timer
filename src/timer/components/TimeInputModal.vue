@@ -1,29 +1,27 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref } from "vue";
 import BaseModal from "@core/base/BaseModal.vue";
-import { TIMER_SESSIONS } from "@timer/models/TimerSessions";
-import { getMinutes } from "@/timer/composables/useTimeFormatter";
+import { TimerSession } from "../models/TimerSession.js";
+import useTimerConfig from "../composables/useTimerConfig.js";
+import { getMinutes } from "../composables/useTimeFormatter";
 import useModalStore from "@core/composables/useModalStore.js";
 
 const { closeTopModal } = useModalStore();
+const { changeTimerTime } = useTimerConfig();
 
 const props = defineProps({
   timerToEdit: {
-    type: TIMER_SESSIONS,
+    type: TimerSession,
     required: true,
   },
 });
 
 const emit = defineEmits(["setTime"]);
-const displayedMinutes = ref(getMinutes(props.timerToEdit.time));
+const displayedMinutes = ref(props.timerToEdit.time);
 const maxMinutes = 60;
 
-//qui da modificare direttamente lo store globale -- dopo il prossimo refactoring
 function setTime() {
-  // if (!document.querySelector("#min-input").value) return; //error
-  // newTime.value = document.querySelector("#min-input").value;
-  // console.log(displayedMinutes.value);
-  //   emit("setTime", min.value);
+  changeTimerTime(props.timerToEdit, displayedMinutes.value);
   closeTopModal();
 }
 
@@ -40,8 +38,8 @@ function increaseTimer() {
 }
 
 function handleMinutesInput() {
-  if (displayedMinutes.value > maxMinutes) displayedMinutes.value = maxMinutes;
-  if (displayedMinutes.value < 0) displayedMinutes.value = 0;
+  if (displayedMinutes > maxMinutes) displayedMinutes = maxMinutes;
+  if (displayedMinutes < 0) displayedMinutes = 0;
 }
 </script>
 
@@ -93,5 +91,9 @@ function handleMinutesInput() {
         </button>
       </div>
     </div>
+
+    <template #end-button>
+      <button class="btn btn-primary" @click="setTime">Conferma</button>
+    </template>
   </BaseModal>
 </template>

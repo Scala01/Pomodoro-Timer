@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { getFormattedTimeByMinutes } from "@/timer/composables/useTimeFormatter";
-import { TimerSession } from "@timer/models/TimerSessions";
+import { TimerSession } from "@timer/models/TimerSession";
 
 const props = defineProps({
   timer: {

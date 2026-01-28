@@ -2,10 +2,11 @@
 import { computed, ref } from "vue";
 import TabBar from "./TabBar.vue";
 import Countdown from "./Countdown.vue";
-import { getTimerSessionByName } from "../models/TimerSessions.js";
+import useTimerConfig from "../composables/useTimerConfig.js";
 import useTimer from "../composables/useTimer.js";
 
 const { current, setTimerSession } = useTimer();
+const { getTimerSessionByName } = useTimerConfig();
 
 const currentTimer = ref(current);
 const isTimerOn = ref(false);

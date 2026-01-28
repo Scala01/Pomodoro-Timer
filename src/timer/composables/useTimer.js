@@ -1,7 +1,7 @@
-import { reactive, toRefs, computed, readonly, markRaw } from "vue";
-import { TimerSession } from "@timer/models/TimerSessions.js";
-import { SESSION_TYPES } from "../models/SessionTypes.js";
+import { reactive, toRefs, computed, readonly, onMounted } from "vue";
+import useTimerConfig from "./useTimerConfig.js";
 
+const { getTimerSessions } = useTimerConfig();
 /**
  * Voglio creare la gestione dei timer qui dentro.
  * Devo creare tre sessioni di timer: Work, Short break e Long break
@@ -34,8 +34,7 @@ const state = reactive({
 export default function useTimer() {
   const { pastSessions } = toRefs(state);
   //no qua il default -> non voglio farlo dipendere da TimerSession class
-  const setDefaultTimer = () =>
-    setTimerSession(new TimerSession("Pomodoro", SESSION_TYPES.FOCUS, 25));
+  const setDefaultTimer = () => setTimerSession(getTimerSessions()[0]);
   setDefaultTimer();
 
   //to do: pastSessions contains past timer sessions only.
@@ -47,13 +46,13 @@ export default function useTimer() {
     state.currentSession = timerSession;
   }
 
+  //togli i computed e lascia il readOnly()
   const history = computed(() => state.pastSessions);
   const current = computed(() => state.currentSession);
 
   return {
-    current,
+    current: readonly(current),
     setTimerSession,
-    // getCurrentTimerSession,
   };
 }
 

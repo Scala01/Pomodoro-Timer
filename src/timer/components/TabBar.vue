@@ -3,13 +3,15 @@ import { ref } from "vue";
 import Settings from "./Settings.vue";
 import Tab from "./Tab.vue";
 import useTimer from "../composables/useTimer.js";
-import { TimerSessions } from "../models/TimerSessions.js";
+import useTimerConfig from "../composables/useTimerConfig.js";
 
 const { current } = useTimer();
+const { getTimerSessions } = useTimerConfig();
 
 const emit = defineEmits(["setNewTimer"]);
 
 const currentTimer = ref(current);
+// add tabs reactivity on timerSessions names
 const timerNames = getTabs();
 
 function changeSession(payload) {
@@ -17,8 +19,8 @@ function changeSession(payload) {
 }
 
 function getTabs() {
-  if (TimerSessions.length != 3) return;
-  return TimerSessions.map((ts) => ts.name);
+  const timerSessions = getTimerSessions();
+  return timerSessions.map((ts) => ts.name);
 }
 </script>
 
