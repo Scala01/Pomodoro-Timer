@@ -1,49 +1,49 @@
 <script setup>
 import { ref, computed, watch } from "vue";
-import useTimer from "../composables/useTimer";
+import usePomodoro from "../composables/usePomodoro";
 import { getFormattedTime } from "../composables/useTimeFormatter.js";
 
-const { currentSession } = useTimer();
+const { currentPhase } = usePomodoro();
 
 const props = defineProps({
   isTimerOn: { type: Boolean, required: true },
   reset: { type: Number, required: true },
 });
 
-//TODO: Componente wrapper tra useTimer e Countdown, per formattare minuti - secondi?
-const timer = ref(currentSession.value.time * 60);
-const timerFunction = ref(null);
+//TODO: Componente wrapper tra usePomodoro e Countdown, per formattare minuti - secondi?
+const timer = ref(currentPhase.value.time * 60);
+const countdown = ref(null);
 
 const formattedTime = computed(() => getFormattedTime(timer.value));
 
 watch(
   () => props.isTimerOn,
-  (newValue) => (newValue ? startTimer() : pauseTimer()),
+  (newValue) => (newValue ? startTimer() : pausePomodoro()),
 );
 
 watch(
-  () => currentSession.value,
-  () => (timer.value = currentSession.value.time * 60),
+  () => currentPhase.value,
+  () => (timer.value = currentPhase.value.time * 60),
 );
 
 watch(
   () => props.reset,
   (newValue, oldValue) => {
-    if (oldValue < newValue) timer.value = currentSession.value.time;
+    if (oldValue < newValue) timer.value = currentPhase.value.time * 60;
   },
 );
 
 function startTimer() {
-  if (timerFunction.value) return;
-  timerFunction.value = setInterval(() => {
-    timer.value > 0 ? timer.value-- : pauseTimer();
+  if (countdown.value) return;
+  countdown.value = setInterval(() => {
+    timer.value > 0 ? timer.value-- : pausePomodoro();
     // this.$emit("finished");
   }, 1000);
 }
 
-function pauseTimer() {
-  clearInterval(timerFunction.value);
-  timerFunction.value = null;
+function pausePomodoro() {
+  clearInterval(countdown.value);
+  countdown.value = null;
 }
 </script>
 

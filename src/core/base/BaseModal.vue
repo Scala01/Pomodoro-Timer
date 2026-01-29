@@ -53,7 +53,9 @@ const closeModal = () => emit("close");
     <slot />
 
     <slot name="end-button">
-      <button type="button" class="btn-primary" @click="close">Conferma</button>
+      <button type="button" class="btn-primary" @click="closeModal">
+        Conferma
+      </button>
     </slot>
   </div>
 </template>

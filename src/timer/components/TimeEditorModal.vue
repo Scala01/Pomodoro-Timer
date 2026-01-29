@@ -1,35 +1,35 @@
 <script setup>
 import { ref } from "vue";
 import BaseModal from "@core/base/BaseModal.vue";
-import { TimerSession } from "../models/TimerSession.js";
-import useTimerConfig from "../composables/useTimerConfig.js";
+import { Phase } from "../models/Phase.js";
+import usePhaseConfig from "../composables/usePhaseConfig.js";
 import useModalStore from "@core/composables/useModalStore.js";
 
 const { closeTopModal } = useModalStore();
-const { changeSessionTime } = useTimerConfig();
+const { setPhaseDuration } = usePhaseConfig();
 
 const props = defineProps({
-  timer: {
-    type: TimerSession,
+  phase: {
+    type: Phase,
     required: true,
   },
 });
 
-const displayedMinutes = ref(props.timer.time);
+const displayedMinutes = ref(props.phase.time);
 const maxMinutes = 60;
 
-function setTime() {
+function setNewPhaseTime() {
   if (!displayedMinutes.value) {
-    displayedMinutes.value = props.timer.time;
+    displayedMinutes.value = props.phase.time;
     closeTopModal();
     return;
   }
-  changeSessionTime(props.timer, displayedMinutes.value);
+  setPhaseDuration(props.phase, displayedMinutes.value);
   closeTopModal();
 }
 
 function reset() {
-  displayedMinutes.value = props.timer.time;
+  displayedMinutes.value = props.phase.time;
 }
 function decreaseTimer() {
   if (displayedMinutes.value == 0) return;
@@ -96,7 +96,7 @@ function handleMinutesInput() {
     </div>
 
     <template #end-button>
-      <button class="btn btn-primary" @click="setTime">Conferma</button>
+      <button class="btn btn-primary" @click="setNewPhaseTime">Conferma</button>
     </template>
   </BaseModal>
 </template>

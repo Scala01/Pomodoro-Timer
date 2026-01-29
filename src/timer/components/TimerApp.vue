@@ -2,19 +2,19 @@
 import { ref } from "vue";
 import TabBar from "./TabBar.vue";
 import Countdown from "./Countdown.vue";
-import useTimerConfig from "../composables/useTimerConfig.js";
-import useTimer from "../composables/useTimer.js";
+import usePhaseConfig from "../composables/usePhaseConfig.js";
+import usePomodoro from "../composables/usePomodoro.js";
 
-const { setTimerSession } = useTimer();
-const { getTimerSessionByName } = useTimerConfig();
+const { setCurrentPhase } = usePomodoro();
+const { getPhase } = usePhaseConfig();
 
 const isTimerOn = ref(false);
 const resetCount = ref(0);
 
-function setTimer(payload) {
-  let selectedTimer = getTimerSessionByName(payload.sessionName);
-  setTimerSession(selectedTimer);
+function activePhase(payload) {
   isTimerOn.value = false;
+  let selectedPhase = getPhase(payload.phaseName);
+  setCurrentPhase(selectedPhase);
 }
 function changeTimerOn() {
   isTimerOn.value = !isTimerOn.value;
@@ -27,7 +27,7 @@ function reset() {
 
 <template>
   <div class="timer-container container-xxl p-5">
-    <TabBar class="mb-4" @active-session-changed="setTimer" />
+    <TabBar class="mb-4" @active-phase-changed="activePhase" />
     <Countdown class="mb-4" :reset="resetCount" :is-timer-on="isTimerOn" />
     <div class="timer-buttons d-flex justify-content-center p-2 g-3">
       <button type="button" class="btn-secondary" @click="reset">

@@ -1,7 +1,7 @@
 import { reactive, toRefs, readonly } from "vue";
-import useSharedState from "./shareSessionsState.js";
+import usePhases from "./usePhases.js";
 
-const { getDefaultSession } = useSharedState();
+const { getDefaultPhase } = usePhases();
 /**
  * Voglio creare la gestione dei timer qui dentro.
  * Devo creare tre sessioni di timer: Work, Short break e Long break
@@ -11,11 +11,11 @@ const { getDefaultSession } = useSharedState();
  *  effettuate le modifiche dell'app per aggiornare il suo stato
  */
 
-const sessionHistory = reactive({
+const phases = reactive({
   // pastSessions: mostra le sessioni di timer eseguite
   // path: mostra l'ordine con cui eseguire automaticamente le sessioni di timer
-  pastSessions: [],
-  currentSession: null,
+  history: [],
+  current: null,
   // let path = [];
   //path: maps in cui w sb lb hanno un valore ciascuno. Chi ha zero è quello attuale, 1 è il prossimo e cosi via
   // ad ogni change del pastSessions va modificaro il path: ogni valore -1 tranne chi ha 0 che avrà valore di default
@@ -32,25 +32,25 @@ const sessionHistory = reactive({
 });
 
 //no qua il default -> non voglio farlo dipendere da TimerSession class
-useTimer().setTimerSession(getDefaultSession());
+usePomodoro().setCurrentPhase(getDefaultPhase());
 
-export default function useTimer() {
-  const { pastSessions, currentSession } = toRefs(sessionHistory);
+export default function usePomodoro() {
+  const { history, current } = toRefs(phases);
 
   //to do: pastSessions contains past timer sessions only.
   // The current session must be stored in dedicated var only.
   // Then on every change of session, pastSessions and
   // currentSession must be updated as the past and current sessions
-  function setTimerSession(timerSession) {
-    sessionHistory.pastSessions.push(timerSession);
-    sessionHistory.currentSession = timerSession;
+  function setCurrentPhase(phase) {
+    phases.history.push(phase);
+    phases.current = phase;
   }
 
   // const currentSession = computed(() => ...);
 
   return {
-    currentSession: readonly(currentSession),
-    setTimerSession,
+    currentPhase: readonly(current),
+    setCurrentPhase,
   };
 }
 

@@ -2,24 +2,24 @@
 import { computed, ref } from "vue";
 import Settings from "./Settings.vue";
 import Tab from "./Tab.vue";
-import useTimer from "../composables/useTimer.js";
-import useTimerConfig from "../composables/useTimerConfig.js";
+import usePomodoro from "../composables/usePomodoro.js";
+import usePhaseConfig from "../composables/usePhaseConfig.js";
 
-const { currentSession } = useTimer();
-const { sessions } = useTimerConfig();
+const { currentPhase } = usePomodoro();
+const { phases } = usePhaseConfig();
 
 //With Typescript: type runtime validation
 const emit = defineEmits({
-  activeSessionChanged: (payload) =>
-    payload && payload.sessionName && typeof payload.sessionName === "string",
+  activePhaseChanged: (payload) =>
+    payload && payload.phaseName && typeof payload.phaseName === "string",
 });
 
-const timerNames = computed(() =>
-  Object.values(sessions.value).map((s) => s.name),
+const phasesNames = computed(() =>
+  Object.values(phases.value).map((s) => s.name),
 );
 
 function onTabClicked(payload) {
-  emit("activeSessionChanged", { sessionName: payload.name });
+  emit("activePhaseChanged", { phaseName: payload.name });
 }
 </script>
 
@@ -29,10 +29,10 @@ function onTabClicked(payload) {
     <div class="row g-3">
       <Tab
         class="col-md-4 col-12"
-        v-for="timerName in timerNames"
-        :key="timerName"
-        :is-active="currentSession.name === timerName"
-        :title="timerName"
+        v-for="phasesName in phasesNames"
+        :key="phasesName"
+        :is-active="currentPhase.name === phasesName"
+        :title="phasesName"
         @active-tab-changed="onTabClicked"
       />
     </div>

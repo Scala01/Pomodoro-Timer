@@ -1,11 +1,11 @@
 <script setup>
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { getFormattedTimeByMinutes } from "@/timer/composables/useTimeFormatter";
-import { TimerSession } from "@timer/models/TimerSession";
+import { Phase } from "@timer/models/Phase";
 
 const props = defineProps({
-  timerSession: {
-    type: TimerSession,
+  timerPhase: {
+    type: Phase,
     required: true,
   },
 });
@@ -13,11 +13,11 @@ const props = defineProps({
 const emit = defineEmits(["editRequested"]);
 
 const formattedTime = computed(() =>
-  getFormattedTimeByMinutes(props.timerSession.time),
+  getFormattedTimeByMinutes(props.timerPhase.time),
 );
 
 function edit() {
-  emit("editRequested", props.timerSession);
+  emit("editRequested", props.timerPhase);
 }
 </script>
 
