@@ -1,57 +1,43 @@
 <script setup>
 import { ref, computed, watch } from "vue";
+import useTimer from "../composables/useTimer";
+import { getFormattedTime } from "../composables/useTimeFormatter.js";
+
+const { currentSession } = useTimer();
 
 const props = defineProps({
-  secondsLeft: {
-    type: Number,
-    required: true,
-  },
   isTimerOn: { type: Boolean, required: true },
   reset: { type: Number, required: true },
 });
 
-const timer = ref(props.secondsLeft);
+//TODO: Componente wrapper tra useTimer e Countdown, per formattare minuti - secondi?
+const timer = ref(currentSession.value.time * 60);
 const timerFunction = ref(null);
 
-const getFormattedTime = computed(() => {
-  const min = Math.floor(timer.value / 60);
-  const sec = timer.value % 60;
-  return `${min}:${sec.toString().padStart(2, "0")}`;
-});
+const formattedTime = computed(() => getFormattedTime(timer.value));
 
 watch(
   () => props.isTimerOn,
-  (newValue) => {
-    newValue ? startTimer() : pauseTimer();
-  },
+  (newValue) => (newValue ? startTimer() : pauseTimer()),
 );
 
 watch(
-  () => props.secondsLeft,
-  () => {
-    timer.value = props.secondsLeft;
-  },
+  () => currentSession.value,
+  () => (timer.value = currentSession.value.time * 60),
 );
 
 watch(
   () => props.reset,
   (newValue, oldValue) => {
-    if (oldValue < newValue) {
-      timer.value = props.secondsLeft;
-    }
+    if (oldValue < newValue) timer.value = currentSession.value.time;
   },
 );
 
 function startTimer() {
   if (timerFunction.value) return;
   timerFunction.value = setInterval(() => {
-    if (timer.value > 0) {
-      timer.value--;
-    } else {
-      pauseTimer();
-      // emit evento "fine countdown" se vuoi
-      // this.$emit("finished");
-    }
+    timer.value > 0 ? timer.value-- : pauseTimer();
+    // this.$emit("finished");
   }, 1000);
 }
 
@@ -62,5 +48,5 @@ function pauseTimer() {
 </script>
 
 <template>
-  <h1 class="fs-0 timer-count">{{ getFormattedTime }}</h1>
+  <h1 class="fs-0 timer-count">{{ formattedTime }}</h1>
 </template>

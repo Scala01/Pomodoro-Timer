@@ -4,6 +4,7 @@ export class TimerSession {
   constructor(name, type, time) {
     //rinominare _name => _key per maggiore
     // compatibilità con lo stato di useTimerConfig.js
+    // this._key = key;
     this._name = name;
     this._type = type;
     this._time = time;

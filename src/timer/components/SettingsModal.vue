@@ -3,16 +3,14 @@ import BaseModal from "@core/base/BaseModal.vue";
 import TimeField from "@core/base/TimeField.vue";
 import useTimerConfig from "../composables/useTimerConfig.js";
 import useModalStore from "@core/composables/useModalStore.js";
-import TimeInputModal from "./TimeInputModal.vue";
+import TimeEditorModal from "./TimeEditorModal.vue";
 
 const { openModal } = useModalStore();
 const { sessions } = useTimerConfig();
 
-function openTimeChange(timer) {
-  openModal(TimeInputModal, { timerToEdit: timer, modalSize: "sm" });
+function openTimeEditor(timerSession) {
+  openModal(TimeEditorModal, { timer: timerSession, modalSize: "sm" });
 }
-
-const emit = defineEmits(["closeSettings"]);
 </script>
 
 <template>
@@ -25,14 +23,17 @@ const emit = defineEmits(["closeSettings"]);
     <div class="container-fluid">
       <div class="row g-3 my-3">
         <div
-          v-for="timer in sessions"
-          :key="timer.name"
+          v-for="session in sessions"
+          :key="session.name"
           class="col-12 col-md-4"
         >
           <!-- Qui verrà visualizzato tutto in base all'oggetto che creerò: quello per i tipi di timer -->
           <div class="editing-container">
-            <p class="fs-4 border-bottom pb-2">{{ timer.name }}</p>
-            <TimeField :timer="timer" @edit-time="openTimeChange" />
+            <p class="fs-4 border-bottom pb-2">{{ session.name }}</p>
+            <TimeField
+              :timer-session="session"
+              @edit-requested="openTimeEditor"
+            />
           </div>
         </div>
       </div>

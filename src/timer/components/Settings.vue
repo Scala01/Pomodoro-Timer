@@ -6,7 +6,7 @@ import useModalStore from "@core/composables/useModalStore.js";
 
 const { openModal } = useModalStore();
 
-function openSettings() {
+function openSettingsModal() {
   openModal(SettingsModal, { modalSize: "lg" });
 }
 </script>
@@ -16,7 +16,7 @@ function openSettings() {
     <button
       type="button"
       class="btn-secondary fs-3 col-1"
-      @click="openSettings"
+      @click="openSettingsModal"
     >
       <i class="bi bi-gear-fill"></i>
     </button>

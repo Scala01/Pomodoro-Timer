@@ -10,10 +10,10 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["tabIsClicked"]);
+const emit = defineEmits(["activeTabChanged"]);
 
-function onClick() {
-  if (!props.isActive) emit("tabIsClicked", { name: props.title });
+function onTabClick() {
+  if (!props.isActive) emit("activeTabChanged", { name: props.title });
 }
 </script>
 
@@ -23,7 +23,7 @@ function onClick() {
       type="button"
       :class="{ active: isActive }"
       class="btn-secondary text-nowrap w-100"
-      @click="onClick"
+      @click="onTabClick"
     >
       {{ title }}
     </button>

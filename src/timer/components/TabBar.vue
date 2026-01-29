@@ -1,26 +1,25 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import Settings from "./Settings.vue";
 import Tab from "./Tab.vue";
 import useTimer from "../composables/useTimer.js";
 import useTimerConfig from "../composables/useTimerConfig.js";
 
-const { current } = useTimer();
-const { getTimerSessions } = useTimerConfig();
+const { currentSession } = useTimer();
+const { sessions } = useTimerConfig();
 
-const emit = defineEmits(["setNewTimer"]);
+//With Typescript: type runtime validation
+const emit = defineEmits({
+  activeSessionChanged: (payload) =>
+    payload && payload.sessionName && typeof payload.sessionName === "string",
+});
 
-const currentTimer = ref(current);
-// add tabs reactivity on timerSessions names
-const timerNames = getTabs();
+const timerNames = computed(() =>
+  Object.values(sessions.value).map((s) => s.name),
+);
 
-function changeSession(payload) {
-  emit("setNewTimer", { timerName: payload.name });
-}
-
-function getTabs() {
-  const timerSessions = getTimerSessions();
-  return timerSessions.map((ts) => ts.name);
+function onTabClicked(payload) {
+  emit("activeSessionChanged", { sessionName: payload.name });
 }
 </script>
 
@@ -32,9 +31,9 @@ function getTabs() {
         class="col-md-4 col-12"
         v-for="timerName in timerNames"
         :key="timerName"
-        :is-active="currentTimer.name === timerName"
+        :is-active="currentSession.name === timerName"
         :title="timerName"
-        @tab-is-clicked="changeSession"
+        @active-tab-changed="onTabClicked"
       />
     </div>
   </div>

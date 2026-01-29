@@ -1,7 +1,7 @@
-import { reactive, toRefs, computed, readonly, onMounted } from "vue";
-import useTimerConfig from "./useTimerConfig.js";
+import { reactive, toRefs, readonly } from "vue";
+import useSharedState from "./shareSessionsState.js";
 
-const { getTimerSessions } = useTimerConfig();
+const { getDefaultSession } = useSharedState();
 /**
  * Voglio creare la gestione dei timer qui dentro.
  * Devo creare tre sessioni di timer: Work, Short break e Long break
@@ -11,7 +11,7 @@ const { getTimerSessions } = useTimerConfig();
  *  effettuate le modifiche dell'app per aggiornare il suo stato
  */
 
-const state = reactive({
+const sessionHistory = reactive({
   // pastSessions: mostra le sessioni di timer eseguite
   // path: mostra l'ordine con cui eseguire automaticamente le sessioni di timer
   pastSessions: [],
@@ -31,27 +31,25 @@ const state = reactive({
   //... altrimenti una queue...
 });
 
+//no qua il default -> non voglio farlo dipendere da TimerSession class
+useTimer().setTimerSession(getDefaultSession());
+
 export default function useTimer() {
-  const { pastSessions } = toRefs(state);
-  //no qua il default -> non voglio farlo dipendere da TimerSession class
-  const setDefaultTimer = () => setTimerSession(getTimerSessions()[0]);
-  setDefaultTimer();
+  const { pastSessions, currentSession } = toRefs(sessionHistory);
 
   //to do: pastSessions contains past timer sessions only.
   // The current session must be stored in dedicated var only.
   // Then on every change of session, pastSessions and
   // currentSession must be updated as the past and current sessions
   function setTimerSession(timerSession) {
-    state.pastSessions.push(timerSession);
-    state.currentSession = timerSession;
+    sessionHistory.pastSessions.push(timerSession);
+    sessionHistory.currentSession = timerSession;
   }
 
-  //togli i computed e lascia il readOnly()
-  const history = computed(() => state.pastSessions);
-  const current = computed(() => state.currentSession);
+  // const currentSession = computed(() => ...);
 
   return {
-    current: readonly(current),
+    currentSession: readonly(currentSession),
     setTimerSession,
   };
 }

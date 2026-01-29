@@ -19,9 +19,7 @@ const overlayIndex = computed(() => {
 });
 
 // function handleOutsideClick() {
-function close() {
-  emit("close");
-}
+const closeModal = () => emit("close");
 </script>
 
 <template>
@@ -38,7 +36,7 @@ function close() {
           <button
             type="button"
             class="btn-secondary btn-icon-md me-2"
-            @click="close"
+            @click="closeModal"
           >
             <slot name="start-button">
               <i class="bi bi-x"></i>

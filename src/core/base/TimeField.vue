@@ -4,22 +4,20 @@ import { getFormattedTimeByMinutes } from "@/timer/composables/useTimeFormatter"
 import { TimerSession } from "@timer/models/TimerSession";
 
 const props = defineProps({
-  timer: {
+  timerSession: {
     type: TimerSession,
     required: true,
   },
 });
 
-const emit = defineEmits(["editTime"]);
-
-const newTime = ref(props.timer);
+const emit = defineEmits(["editRequested"]);
 
 const formattedTime = computed(() =>
-  getFormattedTimeByMinutes(newTime.value.time),
+  getFormattedTimeByMinutes(props.timerSession.time),
 );
 
 function edit() {
-  emit("editTime", props.timer);
+  emit("editRequested", props.timerSession);
 }
 </script>
 

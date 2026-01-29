@@ -3,43 +3,46 @@ import { ref } from "vue";
 import BaseModal from "@core/base/BaseModal.vue";
 import { TimerSession } from "../models/TimerSession.js";
 import useTimerConfig from "../composables/useTimerConfig.js";
-import { getMinutes } from "../composables/useTimeFormatter";
 import useModalStore from "@core/composables/useModalStore.js";
 
 const { closeTopModal } = useModalStore();
-const { changeTimerTime } = useTimerConfig();
+const { changeSessionTime } = useTimerConfig();
 
 const props = defineProps({
-  timerToEdit: {
+  timer: {
     type: TimerSession,
     required: true,
   },
 });
 
-const emit = defineEmits(["setTime"]);
-const displayedMinutes = ref(props.timerToEdit.time);
+const displayedMinutes = ref(props.timer.time);
 const maxMinutes = 60;
 
 function setTime() {
-  changeTimerTime(props.timerToEdit, displayedMinutes.value);
+  if (!displayedMinutes.value) {
+    displayedMinutes.value = props.timer.time;
+    closeTopModal();
+    return;
+  }
+  changeSessionTime(props.timer, displayedMinutes.value);
   closeTopModal();
 }
 
 function reset() {
-  displayedMinutes.value = getMinutes(props.timerToEdit.time);
+  displayedMinutes.value = props.timer.time;
 }
 function decreaseTimer() {
   if (displayedMinutes.value == 0) return;
   displayedMinutes.value--;
 }
 function increaseTimer() {
-  if (displayedMinutes.value == maxMinutes) displayedMinutes.value = 0;
+  if (displayedMinutes.value >= maxMinutes) return;
   displayedMinutes.value++;
 }
 
 function handleMinutesInput() {
-  if (displayedMinutes > maxMinutes) displayedMinutes = maxMinutes;
-  if (displayedMinutes < 0) displayedMinutes = 0;
+  if (displayedMinutes.value > maxMinutes) displayedMinutes.value = maxMinutes;
+  if (displayedMinutes.value < 0) displayedMinutes.value = 0;
 }
 </script>
 
@@ -69,7 +72,7 @@ function handleMinutesInput() {
           type="number"
           class="fs-0 text-center"
           min="0"
-          max="maxMinutes"
+          :max="maxMinutes"
           v-model.number="displayedMinutes"
           @input="handleMinutesInput"
         />
