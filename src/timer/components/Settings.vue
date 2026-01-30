@@ -2,7 +2,7 @@
 
 <script setup>
 import SettingsModal from "./SettingsModal.vue";
-import useModalStore from "@core/composables/useModalStore.js";
+import useModalStore from "@modal/composables/useModalStore.js";
 
 const { openModal } = useModalStore();
 

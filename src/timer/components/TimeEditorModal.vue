@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from "vue";
-import BaseModal from "@core/base/BaseModal.vue";
+import BaseModal from "@modal/base/BaseModal.vue";
 import { Phase } from "../models/Phase.js";
 import usePhaseConfig from "../composables/usePhaseConfig.js";
-import useModalStore from "@core/composables/useModalStore.js";
+import useModalStore from "@modal/composables/useModalStore.js";
 
 const { closeTopModal } = useModalStore();
 const { setPhaseDuration } = usePhaseConfig();

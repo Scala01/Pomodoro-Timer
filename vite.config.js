@@ -11,7 +11,7 @@ export default defineConfig({
     alias: {
       "~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
       "@": path.resolve(__dirname, "src"),
-      "@core": path.resolve(__dirname, "src/core"),
+      "@modal": path.resolve(__dirname, "src/modal"),
       "@timer": path.resolve(__dirname, "src/timer"),
     },
   },

@@ -1,8 +1,9 @@
+import { getPhaseType, fromJson as typeFromJson } from "./PhaseType";
+
 export class Phase {
   constructor(name, type, time) {
-    //Validation...
     this._name = name;
-    this._type = type;
+    this._type = getPhaseType(type);
     this._time = time;
   }
   get name() {
@@ -17,5 +18,9 @@ export class Phase {
 
   set time(newValue) {
     this._time = newValue;
+  }
+
+  static fromJson(json) {
+    return new Phase(json["_name"], typeFromJson(json["_type"]), json["_time"]);
   }
 }

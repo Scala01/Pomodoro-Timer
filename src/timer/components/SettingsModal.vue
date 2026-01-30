@@ -1,8 +1,8 @@
 <script setup>
-import BaseModal from "@core/base/BaseModal.vue";
-import TimeField from "@core/base/TimeField.vue";
+import BaseModal from "@modal/base/BaseModal.vue";
+import TimeField from "./TimeField.vue";
 import usePhaseConfig from "../composables/usePhaseConfig.js";
-import useModalStore from "@core/composables/useModalStore.js";
+import useModalStore from "@modal/composables/useModalStore.js";
 import TimeEditorModal from "./TimeEditorModal.vue";
 
 const { openModal } = useModalStore();

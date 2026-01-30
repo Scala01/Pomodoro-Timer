@@ -1,5 +1,5 @@
 <script setup>
-import useModalStore from "@core/composables/useModalStore";
+import useModalStore from "@modal/composables/useModalStore";
 
 const { modals, closeTopModal } = useModalStore();
 </script>
