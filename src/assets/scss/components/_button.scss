@@ -1,0 +1,52 @@
+@use "../abstract/" as *;
+@use "../bootstrap/" as *;
+
+.btn {
+  border-radius: $border-radius;
+  border: none;
+  &:hover {
+    border: none;
+  }
+  &.btn-icon {
+    line-height: 0;
+    padding: 0.5rem;
+    i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.2em;
+      aspect-ratio: 1/1;
+      font-size: 1.2em;
+    }
+    &-md {
+      @extend .btn-icon;
+      @extend .fs-3;
+    }
+    &-lg {
+      @extend .btn-icon;
+      @extend .fs-2;
+    }
+    &-xl {
+      @extend .btn-icon;
+      @extend .fs-1;
+    }
+  }
+}
+
+.btn-secondary {
+  @extend .btn;
+  color: $accent;
+  background-color: transparent;
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  &:hover {
+    background-color: rgba($color: $secondary-hover, $alpha: 1);
+  }
+}
+
+.btn-primary {
+  @extend .btn;
+  background-color: $accent;
+  &:hover {
+    background-color: rgba($color: $accent-hover, $alpha: 1);
+  }
+}

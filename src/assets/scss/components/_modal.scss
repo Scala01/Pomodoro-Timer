@@ -1,0 +1,59 @@
+@use "../abstract/" as *;
+@use "../bootstrap/" as *;
+
+.modal-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: #e7e7e7;
+
+  //center
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  //size
+  width: calc(100% - 100px);
+  height: calc(100% - 100px);
+  max-width: 800px;
+
+  padding: 2rem;
+  border-radius: $border-radius;
+  scrollbar-width: none;
+
+  &-sm {
+    @extend .modal-container;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px;
+    max-height: 500px;
+  }
+  &-lg {
+    @extend .modal-container;
+    max-width: 1200px;
+  }
+
+  &-flex {
+    @extend .d-flex;
+    @extend .flex-column;
+  }
+}
+
+.modal-overlay {
+  position: absolute;
+  background-color: rgba($color: #333, $alpha: 0.3);
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.editing-container {
+  padding: 1rem;
+  min-width: 100px;
+  min-height: 100px;
+  background-color: #fff;
+  border-radius: $border-radius;
+  position: relative;
+  box-shadow: 3px 3px 0px 0.5px #333;
+}

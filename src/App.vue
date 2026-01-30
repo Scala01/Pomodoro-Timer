@@ -1,9 +1,11 @@
 <script setup>
-import TimerApp from "./components/TimerApp.vue";
+import TimerApp from "@timer/components/TimerApp.vue";
+import ModalContainer from "@modal/components/ModalContainer.vue";
 </script>
 <template>
   <div id="app">
     <TimerApp />
+    <ModalContainer />
   </div>
 </template>
 
