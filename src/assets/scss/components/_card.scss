@@ -1,0 +1,51 @@
+@use "./button" as *;
+@use "../bootstrap/" as *;
+@use "../abstract/" as *;
+
+.card {
+  /* usa poi bootstrap per responsive */
+  min-width: 350px;
+  width: fit-content;
+  display: flex;
+  flex-flow: row;
+  border-radius: $border-radius;
+  color: white;
+  background-color: $bg-card;
+  padding: 1rem 2rem;
+
+  .icon {
+    @extend .btn-primary;
+    background-color: $bg-card-icon;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+
+    &:hover {
+      background-color: $bg-card-icon !important;
+    }
+
+    i {
+      color: $accent;
+    }
+    &-md {
+      @extend .icon;
+      @extend .fs-3;
+    }
+    &-lg {
+      @extend .icon;
+      @extend .fs-2;
+    }
+    &-xl {
+      @extend .icon;
+      @extend .fs-1;
+    }
+  }
+}
+
+.border-card {
+  border: 5px solid $card-border;
+}

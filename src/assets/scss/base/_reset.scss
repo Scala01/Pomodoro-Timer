@@ -1,7 +1,17 @@
-@use "../abstract/colors" as *;
+@use "../abstract/" as *;
 
 body {
-  background-image: $bg-gradient;
+  // background-image: $bg-gradient;
+  background-color: $bg-body !important;
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $text;
+  }
 }
 
 #app {

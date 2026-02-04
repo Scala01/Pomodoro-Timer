@@ -3,12 +3,12 @@
 
 .timer-container {
   max-width: 800px;
-  background-color: rgba($color: #fff, $alpha: 0.5);
+  background-color: $bg-card;
   border-radius: $border-radius;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-  min-height: 80vh;
+  // min-height: 80vh;
 
   .timer-buttons button[type="button"] {
     min-height: 75px !important;

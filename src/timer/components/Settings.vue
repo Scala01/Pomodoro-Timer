@@ -12,13 +12,13 @@ function openSettingsModal() {
 </script>
 
 <template>
-  <div class="row justify-content-end">
-    <button
-      type="button"
-      class="btn-secondary fs-3 col-1"
-      @click="openSettingsModal"
-    >
-      <i class="bi bi-gear-fill"></i>
-    </button>
-  </div>
+  <!-- <div class="d-flex justify-content-center m-4 p-2 g-3"> -->
+  <button
+    type="button"
+    class="btn-secondary btn-icon-md"
+    @click="openSettingsModal"
+  >
+    <i class="bi bi-gear-fill"></i>
+  </button>
+  <!-- </div> -->
 </template>
