@@ -46,11 +46,16 @@ export default function usePomodoro() {
     phases.current = phase;
   }
 
+  function getCurrentPhaseMessage() {
+    return phases.current.getMessage();
+  }
+
   // const currentSession = computed(() => ...);
 
   return {
     currentPhase: readonly(current),
     setCurrentPhase,
+    getCurrentPhaseMessage,
   };
 }
 

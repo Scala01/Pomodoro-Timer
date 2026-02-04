@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import Countdown from "./Countdown.vue";
 import usePhaseConfig from "../composables/usePhaseConfig.js";
 import usePomodoro from "../composables/usePomodoro.js";
@@ -7,11 +7,13 @@ import CycleConfigCard from "./CycleConfigCard.vue";
 import TaskManagerCard from "./TaskManagerCard.vue";
 import Settings from "./Settings.vue";
 
-const { setCurrentPhase } = usePomodoro();
+const { getCurrentPhaseMessage, setCurrentPhase } = usePomodoro();
 const { getPhase } = usePhaseConfig();
 
 const isTimerOn = ref(false);
 const resetCount = ref(0);
+
+const currentMessage = computed(() => getCurrentPhaseMessage());
 
 function activePhase(payload) {
   isTimerOn.value = false;
@@ -39,8 +41,10 @@ function reset() {
   <div class="timer-container container-xxl px-5 py-4 border-card">
     <!-- Based on the current phase -->
     <div class="d-flex flex-column justify-content-center mb-4">
-      <p class="mb-0">#4 - Focus</p>
-      <p class="mb-0">It's time to focus!</p>
+      <!-- <p class="mb-0">#4 - Focus</p>
+      <p class="mb-0">It's time to focus!</p> -->
+      <p class="mb-0"></p>
+      <p class="mb-0">{{ currentMessage }}</p>
     </div>
     <!--  -->
     <Countdown

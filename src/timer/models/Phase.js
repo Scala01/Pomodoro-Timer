@@ -1,4 +1,8 @@
-import { getPhaseType, fromJson as typeFromJson } from "./PhaseType";
+import {
+  getMessage as getTypeMessage,
+  getPhaseType,
+  fromJson as typeFromJson,
+} from "./PhaseType";
 
 export class Phase {
   constructor(name, type, time) {
@@ -18,6 +22,10 @@ export class Phase {
 
   set time(newValue) {
     this._time = newValue;
+  }
+
+  getMessage() {
+    return getTypeMessage(this.type);
   }
 
   static fromJson(json) {
