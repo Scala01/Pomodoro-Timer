@@ -16,22 +16,19 @@ const countdown = ref(null);
 
 const formattedTime = computed(() => getFormattedTime(timer.value));
 
+watch(currentPhase.value, () => reset());
 watch(
   () => props.isTimerOn,
   (newValue) => (newValue ? startTimer() : pausePomodoro()),
 );
-
-watch(
-  () => currentPhase.value,
-  () => (timer.value = currentPhase.value.time * 60),
-);
-
 watch(
   () => props.reset,
   (newValue, oldValue) => {
-    if (oldValue < newValue) timer.value = currentPhase.value.time * 60;
+    if (oldValue < newValue) reset();
   },
 );
+
+const reset = () => (timer.value = currentPhase.value.time * 60);
 
 function startTimer() {
   if (countdown.value) return;
