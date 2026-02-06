@@ -1,6 +1,4 @@
 <script setup>
-import Settings from "./Settings.vue";
-
 import SettingsModal from "./SettingsModal.vue";
 import useModalStore from "@modal/composables/useModalStore.js";
 
@@ -12,7 +10,7 @@ function openSettingsModal() {
 </script>
 
 <template>
-  <div class="card clickable me-2" @click="openSettingsModal">
+  <div class="card clickable m-2 align-items-center" @click="openSettingsModal">
     <div class="icon-lg me-3">
       <i class="bi bi-alarm"></i>
     </div>

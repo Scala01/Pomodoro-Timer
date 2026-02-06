@@ -22,18 +22,9 @@ function edit() {
 </script>
 
 <template>
-  <div class="d-flex flex-column m-3">
-    <div class="fs-5 p-1 text-start"><label for="time">Duration</label></div>
-
-    <div id="time" class="d-flex flex-row justify-content-between">
-      <div
-        class="d-flex flex-row align-items-center justify-content-between px-3 py-2 w-100"
-      >
-        <span class="fs-3"> {{ formattedTime }}</span>
-        <button type="button" class="btn-secondary btn-icon" @click="edit">
-          <i class="bi bi-pencil-fill"></i>
-        </button>
-      </div>
+  <div class="m-3 rounded clickable bg-light" @click="edit">
+    <div class="px-3 py-2">
+      <span class="fs-3"> {{ formattedTime }}</span>
     </div>
   </div>
 </template>

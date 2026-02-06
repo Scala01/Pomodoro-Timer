@@ -1,11 +1,30 @@
 @use "../abstract/" as *;
 @use "../bootstrap/" as *;
+@use "../base/" as *;
 
 .btn {
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
   border-radius: $border-radius;
   border: none;
+  @extend .fs-4;
   &:hover {
     border: none;
+  }
+  &-sm {
+    @extend .btn;
+    @extend .fs-5;
+  }
+  &-md {
+    @extend .btn;
+    @extend .fs-3;
+  }
+  &-lg {
+    @extend .btn;
+    @extend .fs-2;
+  }
+  &-xl {
+    @extend .btn;
+    @extend .fs-1;
   }
   &.btn-icon {
     line-height: 0;
@@ -33,13 +52,14 @@
   }
 }
 
+// REFACTORING: avoid every .btn.btn-primary
 .btn-secondary {
   @extend .btn;
   color: $accent;
-  background-color: transparent;
-  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  background-color: $bg-body;
   &:hover {
-    background-color: rgba($color: $secondary-hover, $alpha: 1);
+    background-color: rgba($color: $accent-hover, $alpha: 1);
+    color: $hover-accent-text;
   }
 }
 
@@ -48,5 +68,6 @@
   background-color: $accent;
   &:hover {
     background-color: rgba($color: $accent-hover, $alpha: 1);
+    color: $hover-accent-text;
   }
 }

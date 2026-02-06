@@ -27,6 +27,18 @@ export class Phase {
   getMessage() {
     return getTypeMessage(this.type);
   }
+  getName() {
+    switch (this.name) {
+      case "work":
+        return "Focus";
+      case "shortBreak":
+        return "Short Break";
+      case "longBreak":
+        return "Long Break";
+      default:
+        throw new Error(`Invalid type: ${this}`);
+    }
+  }
 
   static fromJson(json) {
     return new Phase(json["_name"], typeFromJson(json["_type"]), json["_time"]);

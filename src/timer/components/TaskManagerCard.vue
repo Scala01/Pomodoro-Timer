@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="card clickable me-2">
+  <div class="card clickable m-2">
     <div class="icon-lg me-3">
       <i class="bi bi-list-task"></i>
     </div>

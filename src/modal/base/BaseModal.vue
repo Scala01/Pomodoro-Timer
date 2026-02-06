@@ -19,7 +19,8 @@ const overlayIndex = computed(() => {
 });
 
 // function handleOutsideClick() {
-const closeModal = () => emit("close");
+const onConfirmed = () => emit("close", { saveChanges: true });
+const onClose = () => emit("close");
 </script>
 
 <template>
@@ -36,7 +37,7 @@ const closeModal = () => emit("close");
           <button
             type="button"
             class="btn-secondary btn-icon-md me-2"
-            @click="closeModal"
+            @click="onClose"
           >
             <slot name="start-button">
               <i class="bi bi-x"></i>
@@ -52,10 +53,23 @@ const closeModal = () => emit("close");
 
     <slot />
 
-    <slot name="end-button">
-      <button type="button" class="btn-primary" @click="closeModal">
-        Conferma
-      </button>
+    <slot name="end-buttons">
+      <div class="d-flex flex-column" style="gap: 0.5rem">
+        <button
+          type="button"
+          class="btn-sm btn-secondary clickable"
+          @click="onClose"
+        >
+          Annulla
+        </button>
+        <button
+          type="button"
+          class="btn-sm btn-primary clickable"
+          @click="onConfirmed"
+        >
+          Conferma
+        </button>
+      </div>
     </slot>
   </div>
 </template>

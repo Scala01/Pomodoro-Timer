@@ -7,4 +7,17 @@
   border-radius: $border-radius;
   padding: 3rem;
   color: $text;
+
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+
+  h1 {
+    @extend .fs-0;
+  }
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+  }
 }

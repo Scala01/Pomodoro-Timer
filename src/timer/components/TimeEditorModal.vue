@@ -3,9 +3,7 @@ import { ref } from "vue";
 import BaseModal from "@modal/base/BaseModal.vue";
 import { Phase } from "../models/Phase.js";
 import usePhaseConfig from "../composables/usePhaseConfig.js";
-import useModalStore from "@modal/composables/useModalStore.js";
 
-const { closeTopModal } = useModalStore();
 const { setPhaseDuration } = usePhaseConfig();
 
 const props = defineProps({
@@ -15,17 +13,24 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(["close"]);
+
 const displayedMinutes = ref(props.phase.time);
 const maxMinutes = 60;
+
+function onClose(payload) {
+  if (payload?.saveChanges) {
+    setNewPhaseTime();
+  }
+  emit("close");
+}
 
 function setNewPhaseTime() {
   if (!displayedMinutes.value) {
     displayedMinutes.value = props.phase.time;
-    closeTopModal();
     return;
   }
   setPhaseDuration(props.phase, displayedMinutes.value);
-  closeTopModal();
 }
 
 function reset() {
@@ -47,7 +52,7 @@ function handleMinutesInput() {
 </script>
 
 <template>
-  <BaseModal>
+  <BaseModal @close="onClose">
     <template #start-button> <i class="bi bi-arrow-left"></i> </template>
     <template #title>
       <h2 class="fs-2">Minuti per *Sessione*</h2>
@@ -94,9 +99,5 @@ function handleMinutesInput() {
         </button>
       </div>
     </div>
-
-    <template #end-button>
-      <button class="btn btn-primary" @click="setNewPhaseTime">Conferma</button>
-    </template>
   </BaseModal>
 </template>

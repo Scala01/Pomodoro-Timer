@@ -4,6 +4,7 @@ import TimeField from "./TimeField.vue";
 import usePhaseConfig from "../composables/usePhaseConfig.js";
 import useModalStore from "@modal/composables/useModalStore.js";
 import TimeEditorModal from "./TimeEditorModal.vue";
+// import Phase from "../models/Phase.js";
 
 const { openModal } = useModalStore();
 const { phases } = usePhaseConfig();
@@ -23,9 +24,10 @@ function openTimeEditor(phase) {
     <div class="container-fluid">
       <div class="row g-3 my-3">
         <div v-for="phase in phases" :key="phase.name" class="col-12 col-md-4">
-          <!-- Qui verrà visualizzato tutto in base all'oggetto che creerò: quello per i tipi di timer -->
-          <div class="editing-container">
-            <p class="fs-4 border-bottom pb-2">{{ phase.name }}</p>
+          <div
+            class="border-card d-flex flex-column rounded align-items-center w-100 p-2"
+          >
+            <p class="fs-4 border-bottom pb-2 mb-0">{{ phase.getName() }}</p>
             <TimeField :timer-phase="phase" @edit-requested="openTimeEditor" />
           </div>
         </div>

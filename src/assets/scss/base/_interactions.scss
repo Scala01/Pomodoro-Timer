@@ -1,0 +1,18 @@
+@use "../bootstrap/" as *;
+@use "../abstract/" as *;
+
+.clickable {
+  box-shadow: $box-shadow;
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-bottom: 6px;
+  margin-right: 6px;
+  &:hover,
+  &:active {
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+    background-color: rgba($color: $accent-hover, $alpha: 1);
+    color: $hover-accent-text;
+    box-shadow: 1px 1px 0px 3px $shadow-card;
+    transform: translate(3px, 3px);
+  }
+}

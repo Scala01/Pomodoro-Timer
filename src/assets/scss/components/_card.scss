@@ -3,18 +3,21 @@
 @use "../abstract/" as *;
 
 .card {
-  /* usa poi bootstrap per responsive */
-  min-width: 350px;
-  width: fit-content;
   display: flex;
   flex-flow: row;
-  border-radius: $border-radius;
-  color: white;
-  background-color: $bg-card;
+  width: fit-content;
   padding: 1rem 2rem;
 
+  border-radius: $border-radius;
+  background-color: $bg-card;
+  color: white;
+
+  min-width: 350px;
+  @media (max-width: 768px) {
+    min-width: auto;
+  }
+
   .icon {
-    @extend .btn-primary;
     background-color: $bg-card-icon;
     display: flex;
     flex-flow: column;
@@ -27,25 +30,27 @@
     &:hover {
       background-color: $bg-card-icon !important;
     }
-
     i {
       color: $accent;
     }
     &-md {
       @extend .icon;
       @extend .fs-3;
+      height: calc(1.3rem + 0.6vw + 2rem) !important;
     }
     &-lg {
       @extend .icon;
       @extend .fs-2;
+      height: calc(1.325rem + 0.9vw + 2rem) !important;
     }
     &-xl {
       @extend .icon;
       @extend .fs-1;
+      height: calc(1.375rem + 1.5vw + 2rem) !important;
     }
   }
 }
 
 .border-card {
-  border: 5px solid $card-border;
+  border: 5px solid $border-card;
 }

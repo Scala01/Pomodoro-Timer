@@ -1,5 +1,0 @@
-@use "../abstract/colors" as *;
-
-.tab button[type="button"].active {
-  background-color: $secondary !important;
-}
