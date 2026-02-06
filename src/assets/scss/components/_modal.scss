@@ -1,11 +1,11 @@
-@use "../abstract/" as *;
-@use "../bootstrap/" as *;
+@use "../abstract/colors" as color;
+@use "../abstract/variables" as var;
 
 .modal-container {
   overflow-y: scroll;
   overflow-x: hidden;
-  // background-color: $bg-body;
-  background-color: $bg-card;
+
+  background-color: color.$primary;
   color: white;
 
   //center
@@ -20,7 +20,7 @@
   max-width: 800px;
 
   padding: 2rem;
-  border-radius: $border-radius;
+  border-radius: var.$border-radius;
   scrollbar-width: none;
 
   &-sm {
@@ -36,14 +36,14 @@
   }
 
   &-flex {
-    @extend .d-flex;
-    @extend .flex-column;
+    display: flex;
+    flex-flow: column;
   }
 }
 
 .modal-overlay {
   position: absolute;
-  background-color: rgba($color: #000, $alpha: 0.5);
+  background-color: rgba($color: black, $alpha: 0.6);
   left: 0;
   top: 0;
   width: 100vw;

@@ -1,8 +1,7 @@
-@use "../abstract/" as *;
+@use "../abstract/colors" as *;
 
 body {
-  // background-image: $bg-gradient;
-  background-color: $bg-body !important;
+  background-color: $dark !important;
   p,
   h1,
   h2,
@@ -10,7 +9,7 @@ body {
   h4,
   h5,
   h6 {
-    color: $text;
+    color: white;
   }
 }
 

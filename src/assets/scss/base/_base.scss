@@ -1,8 +1,3 @@
-/*  -----------------------------------------------------------------------------------------------
-  BASE
---------------------------------------------------------------------------------------------------- */
-@use "../abstract/" as *;
-
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -38,7 +33,6 @@ body {
 }
 
 .play-bold {
-  color: $text;
   font-family: "Play", sans-serif;
   font-weight: 700;
   font-style: normal;

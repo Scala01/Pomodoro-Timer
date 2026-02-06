@@ -48,7 +48,7 @@ function pausePomodoro() {
 </script>
 
 <template>
-  <div class="countdown-container">
-    <h1>{{ formattedTime }}</h1>
+  <div class="bg-dark p-5 rounded text-white">
+    <h1 class="fs-md-0 digital-numbers">{{ formattedTime }}</h1>
   </div>
 </template>

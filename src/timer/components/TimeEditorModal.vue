@@ -75,7 +75,8 @@ function handleMinutesInput() {
         <input
           id="minutesInput"
           type="number"
-          class="fs-0 text-center"
+          class="fs-0 text-center bg-secondary text-black border-0 rounded p-3"
+          style="padding-bottom: 2rem !important"
           min="0"
           :max="maxMinutes"
           v-model.number="displayedMinutes"

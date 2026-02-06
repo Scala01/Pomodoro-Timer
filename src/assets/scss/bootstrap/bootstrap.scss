@@ -1,4 +1,6 @@
-@use "../abstract/colors" as *;
+@use "../abstract/colors" as color;
+@use "../abstract/variables" as var;
+
 // Include parts of Bootstrap:
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "bootstrap/scss/functions";
@@ -6,17 +8,17 @@
 // 2. Include any default variable overrides here
 // $primary: #fc7f66; // New primary color
 $theme-colors: (
-  "primary": $primary,
-  "secondary": $secondary,
-  "success": $success,
-  "warning": $warning,
-  "danger": $danger,
-  "light": $light,
-  "dark": $dark,
+  "primary": color.$primary,
+  "secondary": color.$secondary,
+  "success": color.$success,
+  "warning": color.$warning,
+  "danger": color.$danger,
+  "light": color.$light,
+  "dark": color.$dark,
 );
-$border-radius: 8px;
+$border-radius: var.$border-radius;
 $enable-negative-margins: true;
-$box-shadow: 4px 4px 0px 2px #042038;
+$box-shadow: var.$box-shadow;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "bootstrap/scss/variables";
