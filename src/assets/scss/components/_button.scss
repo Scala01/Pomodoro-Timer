@@ -1,11 +1,29 @@
 @use "../abstract/" as *;
-@use "../bootstrap/" as *;
+@use "../base/" as *;
+@use "../abstract/typography" as font;
 
 .btn {
-  border-radius: $border-radius;
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
   border: none;
+  font-size: font.$fs-4;
   &:hover {
     border: none;
+  }
+  &-sm {
+    @extend .btn;
+    font-size: font.$fs-5;
+  }
+  &-md {
+    @extend .btn;
+    font-size: font.$fs-3;
+  }
+  &-lg {
+    @extend .btn;
+    font-size: font.$fs-2;
+  }
+  &-xl {
+    @extend .btn;
+    font-size: font.$fs-1;
   }
   &.btn-icon {
     line-height: 0;
@@ -20,15 +38,15 @@
     }
     &-md {
       @extend .btn-icon;
-      @extend .fs-3;
+      font-size: font.$fs-3;
     }
     &-lg {
       @extend .btn-icon;
-      @extend .fs-2;
+      font-size: font.$fs-2;
     }
     &-xl {
       @extend .btn-icon;
-      @extend .fs-1;
+      font-size: font.$fs-1;
     }
   }
 }
@@ -36,10 +54,10 @@
 .btn-secondary {
   @extend .btn;
   color: $accent;
-  background-color: transparent;
-  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  background-color: $dark;
   &:hover {
-    background-color: rgba($color: $secondary-hover, $alpha: 1);
+    background-color: rgba($color: $accent-hover, $alpha: 1);
+    color: $hover-accent-text;
   }
 }
 
@@ -48,5 +66,6 @@
   background-color: $accent;
   &:hover {
     background-color: rgba($color: $accent-hover, $alpha: 1);
+    color: $hover-accent-text;
   }
 }

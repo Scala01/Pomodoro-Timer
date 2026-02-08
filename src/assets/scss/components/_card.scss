@@ -1,0 +1,56 @@
+@use "../abstract/typography" as font;
+@use "../abstract/variables" as var;
+@use "../abstract/colors" as color;
+
+.card {
+  display: flex;
+  flex-flow: row;
+  width: fit-content;
+  padding: 1rem 2rem;
+
+  border-radius: var.$border-radius;
+  background-color: color.$primary;
+  color: white;
+
+  min-width: 350px;
+  @media (max-width: 768px) {
+    min-width: auto;
+  }
+
+  .icon {
+    background-color: color.$bg-icon;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+
+    &:hover {
+      background-color: color.$bg-icon !important;
+    }
+    i {
+      color: color.$accent;
+    }
+    &-md {
+      @extend .icon;
+      font-size: font.$fs-3;
+      height: calc(1.3rem + 0.6vw + 2rem) !important;
+    }
+    &-lg {
+      @extend .icon;
+      font-size: font.$fs-2;
+      height: calc(1.325rem + 0.9vw + 2rem) !important;
+    }
+    &-xl {
+      @extend .icon;
+      font-size: font.$fs-1;
+      height: calc(1.375rem + 1.5vw + 2rem) !important;
+    }
+  }
+}
+
+.border-card {
+  border: 5px solid color.$border-card;
+}

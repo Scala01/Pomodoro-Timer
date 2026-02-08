@@ -18,7 +18,7 @@ function onTabClick() {
 </script>
 
 <template>
-  <div class="tab">
+  <div class="bg-secondary">
     <button
       type="button"
       :class="{ active: isActive }"

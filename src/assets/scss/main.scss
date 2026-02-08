@@ -1,5 +1,5 @@
-@use "./bootstrap" as *;
+@use "./bootstrap/bootstrap.scss" as *;
 @use "./base" as *;
 @use "./components" as *;
-@use "./vendor/_helpers" as *;
+@use "./utilities/helpers" as *;
 @use "./abstract" as *;

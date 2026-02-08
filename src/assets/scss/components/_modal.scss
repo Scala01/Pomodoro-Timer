@@ -1,10 +1,12 @@
-@use "../abstract/" as *;
-@use "../bootstrap/" as *;
+@use "../abstract/colors" as color;
+@use "../abstract/variables" as var;
 
 .modal-container {
   overflow-y: scroll;
   overflow-x: hidden;
-  background-color: #e7e7e7;
+
+  background-color: color.$primary;
+  color: white;
 
   //center
   position: fixed;
@@ -18,7 +20,7 @@
   max-width: 800px;
 
   padding: 2rem;
-  border-radius: $border-radius;
+  border-radius: var.$border-radius;
   scrollbar-width: none;
 
   &-sm {
@@ -34,26 +36,17 @@
   }
 
   &-flex {
-    @extend .d-flex;
-    @extend .flex-column;
+    display: flex;
+    flex-flow: column;
   }
 }
 
 .modal-overlay {
   position: absolute;
-  background-color: rgba($color: #333, $alpha: 0.3);
+  background-color: rgba($color: black, $alpha: 0.6);
   left: 0;
   top: 0;
   width: 100vw;
-  height: 100vh;
-}
-
-.editing-container {
-  padding: 1rem;
-  min-width: 100px;
-  min-height: 100px;
-  background-color: #fff;
-  border-radius: $border-radius;
-  position: relative;
-  box-shadow: 3px 3px 0px 0.5px #333;
+  min-height: 100vh;
+  min-height: 100%;
 }

@@ -1,4 +1,8 @@
-import { getPhaseType, fromJson as typeFromJson } from "./PhaseType";
+import {
+  getMessage as getTypeMessage,
+  getPhaseType,
+  fromJson as typeFromJson,
+} from "./PhaseType";
 
 export class Phase {
   constructor(name, type, time) {
@@ -18,6 +22,22 @@ export class Phase {
 
   set time(newValue) {
     this._time = newValue;
+  }
+
+  getMessage() {
+    return getTypeMessage(this.type);
+  }
+  getName() {
+    switch (this.name) {
+      case "work":
+        return "Focus";
+      case "shortBreak":
+        return "Short Break";
+      case "longBreak":
+        return "Long Break";
+      default:
+        throw new Error(`Invalid type: ${this}`);
+    }
   }
 
   static fromJson(json) {

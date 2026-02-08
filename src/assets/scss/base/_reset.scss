@@ -1,7 +1,16 @@
 @use "../abstract/colors" as *;
 
 body {
-  background-image: $bg-gradient;
+  background-color: $dark !important;
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: white;
+  }
 }
 
 #app {
