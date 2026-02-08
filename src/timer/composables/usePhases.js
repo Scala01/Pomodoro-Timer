@@ -34,13 +34,6 @@ function initPhases() {
 
 const { workTimer, shortBreakTimer, longBreakTimer } = initPhases();
 
-// Maps...or:
-// const phases = reactive({
-//   work: workTimer,
-//   shortBreak: shortBreakTimer,
-//   longBreak: longBreakTimer,
-// });
-
 //TODO: fare un controllo per verificare che ci siano effettivamente i phases e siano non null
 const state = reactive({
   phases: {

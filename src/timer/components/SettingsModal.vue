@@ -4,7 +4,6 @@ import TimeField from "./TimeField.vue";
 import usePhaseConfig from "../composables/usePhaseConfig.js";
 import useModalStore from "@modal/composables/useModalStore.js";
 import TimeEditorModal from "./TimeEditorModal.vue";
-// import Phase from "../models/Phase.js";
 
 const { openModal } = useModalStore();
 const { phases } = usePhaseConfig();

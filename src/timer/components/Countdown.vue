@@ -1,9 +1,10 @@
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onUnmounted } from "vue";
 import usePomodoro from "../composables/usePomodoro";
 import { getFormattedTime } from "../composables/useTimeFormatter.js";
 
-const { currentPhase } = usePomodoro();
+//TODO: Refactoring
+const { currentPhaseDuration } = usePomodoro();
 
 const props = defineProps({
   isTimerOn: { type: Boolean, required: true },
@@ -11,12 +12,13 @@ const props = defineProps({
 });
 
 //TODO: Componente wrapper tra usePomodoro e Countdown, per formattare minuti - secondi?
-const timer = ref(currentPhase.value.time * 60);
+const timer = ref(currentPhaseDuration.value * 60);
 const countdown = ref(null);
 
 const formattedTime = computed(() => getFormattedTime(timer.value));
 
-watch(currentPhase.value, () => reset());
+watch(currentPhaseDuration, resetTime);
+
 watch(
   () => props.isTimerOn,
   (newValue) => (newValue ? startTimer() : pausePomodoro()),
@@ -24,11 +26,9 @@ watch(
 watch(
   () => props.reset,
   (newValue, oldValue) => {
-    if (oldValue < newValue) reset();
+    if (oldValue < newValue) resetTime();
   },
 );
-
-const reset = () => (timer.value = currentPhase.value.time * 60);
 
 function startTimer() {
   if (countdown.value) return;
@@ -37,11 +37,17 @@ function startTimer() {
     // this.$emit("finished");
   }, 1000);
 }
-
+function resetTime() {
+  timer.value = currentPhaseDuration.value * 60;
+}
 function pausePomodoro() {
   clearInterval(countdown.value);
   countdown.value = null;
 }
+
+onUnmounted(() => {
+  clearInterval(countdown.value);
+});
 </script>
 
 <template>

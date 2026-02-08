@@ -1,6 +1,16 @@
 @use "../abstract/variables" as var;
 @use "../abstract/colors" as color;
 
+.cursor-pointer {
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  &:hover {
+    cursor: pointer;
+  }
+  &.border-light:hover {
+    border-color: color.$dark !important;
+  }
+}
+
 .clickable {
   box-shadow: var.$box-shadow;
   transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);

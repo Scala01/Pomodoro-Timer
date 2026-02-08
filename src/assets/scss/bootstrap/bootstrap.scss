@@ -19,6 +19,7 @@ $theme-colors: (
 $border-radius: var.$border-radius;
 $enable-negative-margins: true;
 $box-shadow: var.$box-shadow;
+$border-width: 3px;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "bootstrap/scss/variables";

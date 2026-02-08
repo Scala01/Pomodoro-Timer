@@ -22,7 +22,10 @@ function edit() {
 </script>
 
 <template>
-  <div class="m-3 rounded clickable bg-light" @click="edit">
+  <div
+    class="m-3 rounded bg-white text-dark border border-light cursor-pointer"
+    @click="edit"
+  >
     <div class="px-3 py-2">
       <span class="fs-3"> {{ formattedTime }}</span>
     </div>
