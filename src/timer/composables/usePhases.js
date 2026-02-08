@@ -57,6 +57,10 @@ export default function usePhases() {
     return state.phases[workTimer.name];
   }
 
+  function getPhase(key) {
+    return state.phases[key];
+  }
+
   function storePhases() {
     localStorage.setItem("timer-phases", JSON.stringify(state.phases));
   }
@@ -65,5 +69,6 @@ export default function usePhases() {
     phases,
     getDefaultPhase,
     storePhases,
+    getPhase,
   };
 }

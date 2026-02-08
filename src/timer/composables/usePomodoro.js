@@ -1,7 +1,9 @@
-import { reactive, toRefs, readonly } from "vue";
+import { reactive, toRefs, readonly, computed } from "vue";
 import usePhases from "./usePhases.js";
+import usePhaseSequence from "./usePhaseSequence.js";
 
-const { getDefaultPhase } = usePhases();
+const { getPhase, getDefaultPhase } = usePhases();
+const { activePhase, next, moveToNext } = usePhaseSequence();
 /**
  * Voglio creare la gestione dei timer qui dentro.
  * Devo creare tre sessioni di timer: Work, Short break e Long break
@@ -12,38 +14,26 @@ const { getDefaultPhase } = usePhases();
  */
 
 const phases = reactive({
-  // pastSessions: mostra le sessioni di timer eseguite
-  // path: mostra l'ordine con cui eseguire automaticamente le sessioni di timer
   history: [],
   current: null,
-  // let path = [];
-  //path: maps in cui w sb lb hanno un valore ciascuno. Chi ha zero è quello attuale, 1 è il prossimo e cosi via
-  // ad ogni change del pastSessions va modificaro il path: ogni valore -1 tranne chi ha 0 che avrà valore di default
-  // che dipenderà dall'ordine.
-  // Dunque:
-  //  - W:  0 1(ogni 1 break) //0 perchè parte work
-  //  - SB: 1 1(ogni 1 work)
-  //  - LB: 4 4(ogni 4 work)
-  // dopo un round
-  //  - W:  1 1
-  //  - SB: 0 1
-  //  - LB: 3 4
-  //... altrimenti una queue...
 });
 
-//no qua il default -> non voglio farlo dipendere da TimerSession class
+phases.current = activePhase;
+
+// forse non va qui
 usePomodoro().setCurrentPhase(getDefaultPhase());
 
 export default function usePomodoro() {
   const { history, current } = toRefs(phases);
 
-  //to do: pastSessions contains past timer sessions only.
-  // The current session must be stored in dedicated var only.
-  // Then on every change of session, pastSessions and
-  // currentSession must be updated as the past and current sessions
+  // Set new phase
   function setCurrentPhase(phase) {
     phases.history.push(phase);
     phases.current = phase;
+  }
+
+  function setNextPhase() {
+    moveToNext();
   }
 
   function getCurrentPhaseMessage() {
@@ -56,6 +46,7 @@ export default function usePomodoro() {
     currentPhase: readonly(current),
     setCurrentPhase,
     getCurrentPhaseMessage,
+    setNextPhase,
   };
 }
 
